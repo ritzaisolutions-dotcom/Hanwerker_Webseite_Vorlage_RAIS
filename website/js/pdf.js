@@ -60,8 +60,15 @@
     const calc = window.lastCalculation;
     if (!calc) return;
 
+    const clientName = (typeof CLIENT !== 'undefined' && CLIENT.name && !CLIENT.name.startsWith('['))
+      ? CLIENT.name
+      : 'Handwerker';
+    const pdfSlug = (typeof CLIENT !== 'undefined' && CLIENT.pdfSlug && !CLIENT.pdfSlug.startsWith('['))
+      ? CLIENT.pdfSlug
+      : 'kalkulation';
+
     const lines = [
-      'Peter Butz Fliesenfachbetrieb - Kalkulation',
+      `${clientName} - Kalkulation`,
       `Datum: ${new Date(calc.generatedAt).toLocaleString('de-DE')}`,
       calc.summary || '',
       `Projektflaeche: ${calc.area} m2`,
@@ -82,7 +89,7 @@
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'kalkulation-fliesenmeister-butz.pdf';
+    link.download = `${pdfSlug}.pdf`;
     document.body.appendChild(link);
     link.click();
     link.remove();

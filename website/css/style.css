@@ -1949,7 +1949,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .kontakt-map__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(rgba(247, 248, 250, 0.95), rgba(247, 248, 250, 0.95)), url('../images/butz_header_2.jpg') center/cover no-repeat;
+  background: linear-gradient(rgba(247, 248, 250, 0.95), rgba(247, 248, 250, 0.95)), url('../images/hero-poster.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;

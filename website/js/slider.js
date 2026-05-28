@@ -1,4 +1,4 @@
-/* Before/After Slider — Peter Butz Fliesenfachbetrieb */
+/* Before/After Slider — Handwerker Template */
 (() => {
   'use strict';
 

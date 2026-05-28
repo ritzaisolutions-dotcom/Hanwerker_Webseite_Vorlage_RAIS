@@ -290,25 +290,45 @@
   const acceptMapBtn = document.getElementById('acceptMapBtn');
   const realMapContainer = document.getElementById('realMapContainer');
 
+  const getMapsEmbedUrl = () => {
+    if (realMapContainer?.dataset.mapsUrl) return realMapContainer.dataset.mapsUrl;
+    if (typeof CLIENT !== 'undefined' && CLIENT.googleMapsEmbedUrl && !CLIENT.googleMapsEmbedUrl.startsWith('[')) {
+      return CLIENT.googleMapsEmbedUrl;
+    }
+    return '';
+  };
+
+  const getMapsIframeTitle = () => {
+    if (realMapContainer?.dataset.mapsTitle) return realMapContainer.dataset.mapsTitle;
+    if (typeof CLIENT !== 'undefined' && CLIENT.name && !CLIENT.name.startsWith('[')) {
+      return `Standort ${CLIENT.name} – ${CLIENT.strasse}, ${CLIENT.plz} ${CLIENT.ort}`;
+    }
+    return 'Standort';
+  };
+
+  const mountMapIframe = () => {
+    if (!realMapContainer || realMapContainer.querySelector('iframe')) return;
+    const embedUrl = getMapsEmbedUrl();
+    if (!embedUrl) return;
+    const iframe = document.createElement('iframe');
+    iframe.src = embedUrl;
+    iframe.title = getMapsIframeTitle();
+    iframe.loading = 'lazy';
+    iframe.allowFullscreen = true;
+    iframe.style.border = '0';
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    realMapContainer.appendChild(iframe);
+  };
+
   const renderMapState = () => {
     if (!gatedMapContainer || !mapConsentOverlay || !realMapContainer) return;
-    
+
     const allowed = getConsent('googleMaps');
     if (allowed) {
       mapConsentOverlay.style.display = 'none';
       realMapContainer.style.display = 'block';
-      
-      if (!realMapContainer.querySelector('iframe')) {
-        const iframe = document.createElement('iframe');
-        iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2600.312151670987!2d8.400440677114227!3d49.299587371396346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4797b3f6c7d6c337%3A0x8922615179eaeac5!2sFliesen%20Butz!5e0!3m2!1sde!2sde!4v1716900000000!5m2!1sde!2sde';
-        iframe.title = 'Standort Peter Butz Fliesenfachbetrieb – Werkstraße 23, 67354 Römerberg';
-        iframe.loading = 'lazy';
-        iframe.allowFullscreen = true;
-        iframe.style.border = '0';
-        iframe.style.width = '100%';
-        iframe.style.height = '100%';
-        realMapContainer.appendChild(iframe);
-      }
+      mountMapIframe();
     } else {
       mapConsentOverlay.style.display = 'flex';
       realMapContainer.style.display = 'none';
@@ -327,17 +347,7 @@
       } else {
         mapConsentOverlay.style.display = 'none';
         realMapContainer.style.display = 'block';
-        if (!realMapContainer.querySelector('iframe')) {
-          const iframe = document.createElement('iframe');
-          iframe.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2600.312151670987!2d8.400440677114227!3d49.299587371396346!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4797b3f6c7d6c337%3A0x8922615179eaeac5!2sFliesen%20Butz!5e0!3m2!1sde!2sde!4v1716900000000!5m2!1sde!2sde';
-          iframe.title = 'Standort Peter Butz Fliesenfachbetrieb – Werkstraße 23, 67354 Römerberg';
-          iframe.loading = 'lazy';
-          iframe.allowFullscreen = true;
-          iframe.style.border = '0';
-          iframe.style.width = '100%';
-          iframe.style.height = '100%';
-          realMapContainer.appendChild(iframe);
-        }
+        mountMapIframe();
       }
     });
   }

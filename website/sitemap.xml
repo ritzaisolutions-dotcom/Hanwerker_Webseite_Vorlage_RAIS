@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- DOMAIN: Alle URLs in SETUP.md Schritt 9 durch CLIENT.domain ersetzen -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.fliesen-butz.de/</loc></url>
-  <url><loc>https://www.fliesen-butz.de/referenzen.html</loc></url>
-  <url><loc>https://www.fliesen-butz.de/team.html</loc></url>
-  <url><loc>https://www.fliesen-butz.de/impressum.html</loc></url>
-  <url><loc>https://www.fliesen-butz.de/datenschutz.html</loc></url>
-  <url><loc>https://www.fliesen-butz.de/leistungen/badsanierung.html</loc></url>
-  <url><loc>https://www.fliesen-butz.de/leistungen/fliesenverlegung.html</loc></url>
-  <url><loc>https://www.fliesen-butz.de/leistungen/terrassen.html</loc></url>
-  <url><loc>https://www.fliesen-butz.de/leistungen/reparatur.html</loc></url>
+  <url><loc>https://www.example-handwerker.de/</loc></url>
+  <url><loc>https://www.example-handwerker.de/referenzen.html</loc></url>
+  <url><loc>https://www.example-handwerker.de/team.html</loc></url>
+  <url><loc>https://www.example-handwerker.de/impressum.html</loc></url>
+  <url><loc>https://www.example-handwerker.de/datenschutz.html</loc></url>
+  <url><loc>https://www.example-handwerker.de/leistungen/badsanierung.html</loc></url>
+  <url><loc>https://www.example-handwerker.de/leistungen/fliesenverlegung.html</loc></url>
+  <url><loc>https://www.example-handwerker.de/leistungen/terrassen.html</loc></url>
+  <url><loc>https://www.example-handwerker.de/leistungen/reparatur.html</loc></url>
 </urlset>

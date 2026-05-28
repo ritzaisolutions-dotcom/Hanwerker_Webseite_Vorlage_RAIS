@@ -31,7 +31,9 @@
       metaDesc.content = metaDesc.content
         .replace(/\[FIRMENNAME\]/g, CLIENT.name)
         .replace(/\[ORT\]/g, CLIENT.ort)
-        .replace(/\[HANDWERKSBEZEICHNUNG\]/g, CLIENT.handwerksbezeichnung);
+        .replace(/\[HANDWERKSBEZEICHNUNG\]/g, CLIENT.handwerksbezeichnung)
+        .replace(/\[BERUFSBEZEICHNUNG\]/g, CLIENT.berufsbezeichnung)
+        .replace(/\[LEISTUNGEN_KURZ\]/g, CLIENT.leistungenKurz || '');
     }
     const setMeta = (selector, value) => {
       if (!value || value.startsWith('[')) return;
@@ -109,8 +111,13 @@
 
     // ── 10. GOOGLE MAPS EMBED ─────────────────────────────
     const mapContainer = document.getElementById('realMapContainer');
-    if (mapContainer && CLIENT.googleMapsEmbedUrl && !CLIENT.googleMapsEmbedUrl.startsWith('[')) {
-      mapContainer.dataset.mapsUrl = CLIENT.googleMapsEmbedUrl;
+    if (mapContainer) {
+      if (CLIENT.googleMapsEmbedUrl && !CLIENT.googleMapsEmbedUrl.startsWith('[')) {
+        mapContainer.dataset.mapsUrl = CLIENT.googleMapsEmbedUrl;
+      }
+      if (CLIENT.name && !CLIENT.name.startsWith('[')) {
+        mapContainer.dataset.mapsTitle = `Standort ${CLIENT.name} – ${CLIENT.strasse}, ${CLIENT.plz} ${CLIENT.ort}`;
+      }
     }
 
     // ── 11. KONTAKT & FOOTER ÖFFNUNGSZEITEN ──────────────
@@ -222,11 +229,10 @@
       }
     });
 
-    // ── 16. CALLBACK FEHLERMELDUNG (enthält Telefonnummer) ─
-    const callbackErrEl = document.getElementById('calcCallbackResult');
-    if (callbackErrEl) {
-      // Wird dynamisch durch calc.js gesetzt — kein Eingriff nötig
-      // Telefonnummer im Fehlertext wird durch calc.js aus CLIENT gezogen (s. dort)
+    // ── 16. KOSTENRECHNER RÜCKRUF-BETREFF (Default) ─────────
+    const callbackSubject = document.getElementById('calcCallbackSubject');
+    if (callbackSubject && CLIENT.name && !CLIENT.name.startsWith('[')) {
+      callbackSubject.value = `RÜCKRUF Kostenrechner: ${CLIENT.name}`;
     }
   };
 

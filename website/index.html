@@ -18,16 +18,16 @@
   <meta name="twitter:title" content="[FIRMENNAME]">
   <meta name="twitter:description" content="[HANDWERKSBEZEICHNUNG]-Meisterbetrieb in [ORT].">
   <meta name="twitter:image" content="[DOMAIN]/images/og-image.jpg">
-  <link rel="icon" type="image/png" href="images/favicon-butz.png">
+  <link rel="icon" type="image/png" href="images/favicon-client.png">
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="preload" as="image" href="images/butz_header_2.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="images/hero-poster.webp" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/animations.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="css/animations.css"></noscript>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/config.js"></script>
-  <script src="js/config-apply.js"></script>
+  <script defer src="js/config-apply.js"></script>
   <script>
     window.klaroConfig = {
       version: 1,
@@ -118,8 +118,8 @@
     <div class="nav__inner">
       <a href="#hero" class="nav__wordmark" aria-label="[FIRMENNAME], Startseite">
         <picture>
-          <source srcset="images/logo-butz.webp" type="image/webp">
-          <img class="nav__logo" src="images/logo-butz.png" alt="[FIRMENNAME]" data-config-alt="true" width="200" height="42" decoding="async" fetchpriority="high">
+          <source srcset="images/logo-client.webp" type="image/webp">
+          <img class="nav__logo" src="images/logo-client.png" alt="[FIRMENNAME]" data-config-alt="true" width="200" height="42" decoding="async" fetchpriority="high">
         </picture>
       </a>
 
@@ -170,7 +170,7 @@
           loop
           playsinline
           preload="auto"
-          poster="images/butz_header_2.jpg"
+          poster="images/hero-poster.jpg"
           data-video-candidates="images/video_hero_section_backround.mp4,images/video_hero_section_background.mp4">
           <source src="images/video_hero_section_backround.mp4" type="video/mp4">
         </video>
@@ -459,7 +459,7 @@
               <p class="calc-callback__intro">Geben Sie Ihre Telefonnummer an – wir rufen Sie mit Ihrem Rechnerergebnis zurück, in der Regel innerhalb von 24&nbsp;Stunden.</p>
               <form id="calcCallbackForm" class="calc-callback-form" action="https://api.web3forms.com/submit" method="post" novalidate>
                 <input type="hidden" name="access_key" value="099dd006-e623-4ae8-8980-c25b12e709bd">
-                <input type="hidden" name="subject" id="calcCallbackSubject" value="RÜCKRUF Kostenrechner: Fliesenmeister Butz">
+                <input type="hidden" name="subject" id="calcCallbackSubject" value="RÜCKRUF Kostenrechner">
                 <label for="calc_callback_phone">Telefonnummer für Rückruf
                   <input id="calc_callback_phone" name="phone" type="tel" required autocomplete="tel" placeholder="z. B. 0151 12345678">
                 </label>
@@ -504,7 +504,7 @@
 
         <div>
           <header class="section-header reveal">
-            <span class="section-label">Warum Butz</span>
+            <span class="section-label" data-config="warumLabel">Warum wir</span>
             <h2 class="section-h2">Was uns von anderen unterscheidet.</h2>
           </header>
 
@@ -512,29 +512,29 @@
             <li class="warum-item reveal reveal-delay-1">
               <div class="warum-item__icon">✓</div>
               <div>
-                <div class="warum-item__title">Meisterbetrieb seit 1997</div>
-                <p class="warum-item__text">Über 27 Jahre Handwerkskunst. Als Mitglied im Fachverband Deutsches Fliesengewerbe stehen wir für geprüfte Qualität.</p>
+                <div class="warum-item__title" data-config="warum1Titel">[USP_1_TITEL]</div>
+                <p class="warum-item__text" data-config="warum1Text">[USP_1_TEXT]</p>
               </div>
             </li>
             <li class="warum-item reveal reveal-delay-2">
               <div class="warum-item__icon">✓</div>
               <div>
-                <div class="warum-item__title">Sauber &amp; respektvoll</div>
-                <p class="warum-item__text">Staubschutzkonzept, tägliche Reinigung der Baustelle. Wir behandeln Ihr Zuhause so, als wäre es unser eigenes.</p>
+                <div class="warum-item__title" data-config="warum2Titel">[USP_2_TITEL]</div>
+                <p class="warum-item__text" data-config="warum2Text">[USP_2_TEXT]</p>
               </div>
             </li>
             <li class="warum-item reveal reveal-delay-3">
               <div class="warum-item__icon">✓</div>
               <div>
-                <div class="warum-item__title">Alles aus einer Hand</div>
-                <p class="warum-item__text">Ein Ansprechpartner koordiniert alle beteiligten Gewerke. Kein Abstimmungschaos, keine Lücken in der Planung.</p>
+                <div class="warum-item__title" data-config="warum3Titel">[USP_3_TITEL]</div>
+                <p class="warum-item__text" data-config="warum3Text">[USP_3_TEXT]</p>
               </div>
             </li>
             <li class="warum-item reveal reveal-delay-4">
               <div class="warum-item__icon">✓</div>
               <div>
-                <div class="warum-item__title">Termingerecht &amp; planbar</div>
-                <p class="warum-item__text">Baustart erst wenn alle Materialien am Lager sind. Verbindliche Termine, keine Überraschungen.</p>
+                <div class="warum-item__title" data-config="warum4Titel">[USP_4_TITEL]</div>
+                <p class="warum-item__text" data-config="warum4Text">[USP_4_TEXT]</p>
               </div>
             </li>
           </ul>
@@ -565,10 +565,10 @@
         <div class="familie-text">
           <header class="section-header reveal">
             <span class="section-label">Über uns</span>
-            <h2 class="section-h2">Handwerks&shy;kunst seit 1997.</h2>
+            <h2 class="section-h2">Handwerks&shy;kunst seit <span data-config="gruendungsjahr">[GRUENDUNGSJAHR]</span>.</h2>
           </header>
 
-          <div class=”familie-body reveal reveal-delay-1”>
+          <div class="familie-body reveal reveal-delay-1">
             <!-- ══════════════════════════════════════════════════════
                  [ÜBER_UNS_TEXT] — Hier den Unternehmenstext eintragen.
                  3-4 Absätze empfohlen. <p>...</p> pro Absatz.
@@ -989,7 +989,7 @@
             <li><span data-config="strasse">[STRASSE]</span>, <span data-config="plz">[PLZ]</span> <span data-config="ort">[ORT]</span></li>
             <li><a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON]</a></li>
             <li><a href="mailto:#" data-config-href="mailto" data-config="email">[EMAIL]</a></li>
-            <li style="margin-top:.5rem;color:rgba(255,255,255,.35);font-size:.7rem">Mo–Do 08–17 · Fr 08–13 Uhr</li>
+            <li style="margin-top:.5rem;color:rgba(255,255,255,.35);font-size:.7rem" data-config="oeffZeitenKurz">Mo–Do 08–17 · Fr 08–13 Uhr</li>
           </ul>
         </div>
       </div>
@@ -1007,8 +1007,6 @@
 
   <div id="klaro"></div>
 
-  <script src="js/config.js"></script>
-  <script src="js/config-apply.js"></script>
   <script src="js/main.js" defer></script>
   <script src="js/calc.js" defer></script>
   <script src="js/pdf.js" defer></script>
