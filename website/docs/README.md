@@ -15,7 +15,7 @@
 - Berufshaftpflicht (Versicherer, Anschrift, Geltungsraum) in `impressum.html` ergänzen (Gate B5).
 - Echten Klaro-Text und finale Servicebeschreibung juristisch abstimmen.
 - Cal.com-Embed final einbauen (nur nach Consent).
-- Web3Forms produktiver Access-Key (Vercel Env, Empfänger `info@fliesen-butz.de`).
+- Web3Forms produktiver Access-Key (Empfänger = Kunden-E-Mail aus config.js).
 - Über-uns-Text final vom Kunden freigeben und Platzhalter entfernen.
 - Zweites Vorher/Nachher-Paar inkl. Tab in Slider aktivieren.
 - Weitere Unterseiten-Bilder auf WebP (Leistungsseiten); Hero-Video komprimieren (bewusst zurückgestellt).

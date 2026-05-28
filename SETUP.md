@@ -1,6 +1,6 @@
 # Handwerker Website Template — Setup-Anleitung
 
-**Ziel:** Neuer Kundendeploy in unter 2 Stunden durch reine Konfiguration.
+**Ziel:** Neuer Kundendeploy in **4–6 Stunden** (config.js + Texte + Bilder + Rechtliches prüfen).
 
 ---
 
@@ -75,9 +75,9 @@ Alle Bilder liegen in `website/images/`. Folgende Dateien ersetzen:
 
 | Dateiname | Verwendung | Empf. Dimension | Format |
 |-----------|-----------|-----------------|--------|
-| `logo-[KUNDE].png` + `.webp` | Logo in Navigation | min. 800×170px, transparenter Hintergrund | PNG + WebP |
-| `favicon-[KUNDE].png` | Browser-Tab-Icon | 512×512px quadratisch | PNG |
-| `butz_header_2.jpg` + `.webp` | Hero-Hintergrund (Fallback) | 1920×1080px min. | JPG + WebP |
+| `logo-client.png` + `.webp` | Logo in Navigation | min. 800×170px, transparenter Hintergrund | PNG + WebP |
+| `favicon-client.png` | Browser-Tab-Icon | 512×512px quadratisch | PNG |
+| `hero-poster.jpg` + `.webp` | Hero-Hintergrund (Fallback) | 1920×1080px min. | JPG + WebP |
 | `video_hero_section_backround.mp4` | Hero-Video (optional) | 1920×1080px, max. 800KB | MP4 |
 | `team-bild.jpg` + `.webp` | Teamfoto (Über uns) | 4:3 Format, min. 1200×900px | JPG + WebP |
 | `bild-haus.jpg` + `.webp` | Betriebsbild (Warum wir) | 4:3 Format, min. 1200×900px | JPG + WebP |
@@ -94,21 +94,37 @@ Alle Bilder liegen in `website/images/`. Folgende Dateien ersetzen:
 .\scripts\convert-images-webp.ps1
 ```
 
-**Logo-Dateiname anpassen:**
-Nach Umbenennen in `website/index.html` alle Vorkommen von `logo-butz.png` / `logo-butz.webp` ersetzen:
-```
-Suchen: logo-butz
-Ersetzen: logo-[KUNDENKÜRZEL]
-```
+**Logo-Dateiname:** Im Template heißen die Dateien fest `logo-client.*` und `favicon-client.png`. Kundenlogo unter diesen Namen in `website/images/` ablegen — **kein** Umbenennen in HTML nötig.
+
+**Weitere Pflichtfelder in config.js (neben Kontakt/SEO):**
+
+| Feld | Beschreibung |
+|------|-------------|
+| `leistungenKurz` | Kurzliste für Meta-Description |
+| `leistung1Titel` … `leistung4Text` | 4 Leistungskarten Startseite |
+| `warumLabel`, `warum1Titel` … `warum4Text` | Warum-wir-Sektion |
+| `referenzenIntro` | Einleitung auf referenzen.html |
+| `team1Name` … `team3Rolle` | Teamseite (optional leer lassen) |
+| `pdfSlug` | Dateiname für Kalkulations-PDF |
 
 ---
 
 ## Schritt 4: Texte in HTML eintragen
 
-Diese Inhalte sind **nicht** in config.js — sie müssen direkt in `website/index.html` editiert werden:
+Diese Inhalte sind **teilweise** in `config.js`, teilweise in HTML:
+
+| Inhalt | Wo |
+|--------|-----|
+| Leistungen (4 Karten), Warum-wir (4 Punkte), Team, Referenzen-Intro | `config.js` |
+| Über-uns (3 Absätze) | `index.html` → `[ÜBER_UNS_ABSATZ_1]` … |
+| Google-Bewertungen (5×) | `index.html` → `[BEWERTUNG_1_…]` |
+| Leistungs-Unterseiten | `website/leistungen/*.html` |
 
 ### 4a) Über-Uns Text
 Suche in `index.html` nach `[ÜBER_UNS_ABSATZ_1]` — ersetze die 3 Absätze mit dem Unternehmenstext des Kunden.
+
+### 4a2) Warum-wir & Leistungen
+Die meisten Texte laufen über `config.js` (`leistung1Titel`, `warum1Titel` usw.). Nur wenn die Struktur abweicht: direkt in `index.html` editieren.
 
 ### 4b) Google-Bewertungen (5 Stück)
 Suche nach `[BEWERTUNG_1_VORNAME_NACHNAME]` — ersetze alle 5 Bewertungen mit echten Google-Bewertungen:
@@ -117,11 +133,8 @@ Suche nach `[BEWERTUNG_1_VORNAME_NACHNAME]` — ersetze alle 5 Bewertungen mit e
 - Avatar-Initiale: Ersten Buchstaben des Vornamens
 - Link: `data-config-href="googleBewertung"` bleibt (wird automatisch gefüllt)
 
-### 4c) Leistungen
-Suche nach `[LEISTUNG_1_TITEL]` — ersetze alle 4 Leistungstitel und Beschreibungen. Auch die Leistungs-Unterseiten unter `website/leistungen/` anpassen.
-
-### 4d) Warum-Wir Punkte
-Die 4 USP-Punkte in der Warum-Sektion in `index.html` direkt bearbeiten (sind nicht in config.js — sie sind zu individuell).
+### 4c) Leistungs-Unterseiten
+Texte unter `website/leistungen/*.html` anpassen (nicht in config.js).
 
 ---
 
