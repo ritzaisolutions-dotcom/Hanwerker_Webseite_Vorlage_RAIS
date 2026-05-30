@@ -1,11 +1,20 @@
 :root {
-  --primary:       #1a2b4c;   /* [PRIMÄRFARBE]  — aus Kundenlogo/Branding wählen */
-  --primary-mid:   #243a61;   /* [PRIMÄR-MITTEL] — etwas heller als primary */
-  --primary-light: #3d5580;   /* [PRIMÄR-HELL]   — für Hover/Akzente */
-  --accent:        #2980b9;   /* [AKZENTFARBE]   — CTA-Farbe, aus Logo ableiten */
-  --accent-hover:  #2471a3;   /* [AKZENT-HOVER]  — ~10% dunkler als accent */
-  --accent-light:  #d6eaf8;   /* [AKZENT-HELL]   — Hintergrund für Badges */
+  /* ══════════════════════════════════════════════════════════════
+     BRAND COLORS
+     Werden von config-apply.js via CLIENT.colors überschrieben.
+     Diese Werte sind Fallbacks / Vorschau-Defaults.
+  ══════════════════════════════════════════════════════════════ */
+  --primary:       #1a2b4c;   /* Primärfarbe   — aus Kundenlogo wählen         */
+  --primary-dark:  #0d1526;   /* Primär dunkel — Hero-Overlay, Footer          */
+  --primary-mid:   #243a61;   /* Primär mittel — etwas heller als primary      */
+  --primary-light: #3d5580;   /* Primär hell   — Hover-States, Akzente         */
+  --accent:        #2980b9;   /* Akzentfarbe   — CTA-Buttons, aus Logo ableiten */
+  --accent-hover:  #2471a3;   /* Akzent Hover  — ~10 % dunkler als --accent    */
+  --accent-light:  #d6eaf8;   /* Akzent hell   — Badge-Hintergrund             */
 
+  /* ══════════════════════════════════════════════════════════════
+     UI NEUTRAL COLORS
+  ══════════════════════════════════════════════════════════════ */
   --bg:         #ffffff;
   --bg-alt:     #f7f8fa;
   --text:       #333333;
@@ -13,6 +22,16 @@
   --text-muted: #999999;
   --border:     #e4e8ef;
 
+  /* ══════════════════════════════════════════════════════════════
+     THIRD-PARTY COLORS  (nicht über config.js veränderbar)
+  ══════════════════════════════════════════════════════════════ */
+  --wa-green:       #25d366;  /* WhatsApp-Grün — Brand-Vorgabe, nicht ändern   */
+  --wa-green-dark:  #128c7e;  /* WhatsApp dunkel                               */
+  --wa-green-hover: #20b858;  /* WhatsApp Hover                                */
+
+  /* ══════════════════════════════════════════════════════════════
+     SPACING SCALE
+  ══════════════════════════════════════════════════════════════ */
   --sp-1: 0.25rem;
   --sp-2: 0.5rem;
   --sp-3: 1rem;
@@ -22,21 +41,34 @@
   --sp-7: 4rem;
   --sp-8: 6rem;
 
+  /* ══════════════════════════════════════════════════════════════
+     BORDER RADIUS
+  ══════════════════════════════════════════════════════════════ */
   --r-sm:   2px;
   --r-md:   4px;
   --r-lg:   8px;
+  --r-xl:   16px;
   --r-full: 9999px;
 
+  /* ══════════════════════════════════════════════════════════════
+     SHADOWS
+  ══════════════════════════════════════════════════════════════ */
   --s-sm: 0 1px 4px rgba(26,43,76,.08);
   --s-md: 0 4px 20px rgba(26,43,76,.12);
   --s-lg: 0 8px 40px rgba(26,43,76,.18);
 
+  /* ══════════════════════════════════════════════════════════════
+     ANIMATION
+  ══════════════════════════════════════════════════════════════ */
   --ease:   cubic-bezier(0.16, 1, 0.3, 1);
   --t-fast: 200ms;
   --t-base: 300ms;
   --t-slow: 600ms;
 
-  /* Live setup: self-hosted fonts in assets/fonts/ (no Google-hosted font files) */
+  /* ══════════════════════════════════════════════════════════════
+     TYPOGRAPHY
+     Self-hosted Fonts in assets/fonts/ — keine Google-Font-Requests
+  ══════════════════════════════════════════════════════════════ */
   --ff-head: 'CormorantGaramondLocal', 'Cormorant Garamond', Georgia, serif;
   --ff-body: 'DMSansLocal', 'DM Sans', Arial, sans-serif;
 
@@ -49,6 +81,9 @@
   --fs-3xl:  clamp(2rem,    4vw,   3rem);
   --fs-4xl:  clamp(2.8rem,  5vw,   4.5rem);
 
+  /* ══════════════════════════════════════════════════════════════
+     LAYOUT
+  ══════════════════════════════════════════════════════════════ */
   --nav-h: 72px;
   --max-w: 1200px;
 
