@@ -45,9 +45,9 @@
     setMeta('meta[property="og:title"]',       CLIENT.name);
     setMeta('meta[property="og:site_name"]',    CLIENT.name);
     setMeta('meta[property="og:url"]',          CLIENT.domain + '/');
-    setMeta('meta[property="og:image"]',        CLIENT.domain + '/images/og-image.jpg');
+    setMeta('meta[property="og:image"]',        CLIENT.domain + '/images/og-image.svg');
     setMeta('meta[name="twitter:title"]',       CLIENT.name);
-    setMeta('meta[name="twitter:image"]',       CLIENT.domain + '/images/og-image.jpg');
+    setMeta('meta[name="twitter:image"]',       CLIENT.domain + '/images/og-image.svg');
     const canonical = document.querySelector('link[rel="canonical"]');
     if (canonical && CLIENT.domain && !CLIENT.domain.startsWith('[')) {
       canonical.href = CLIENT.domain + '/';
@@ -119,19 +119,30 @@
       if (CLIENT.googleMapsEmbedUrl && !CLIENT.googleMapsEmbedUrl.startsWith('[')) {
         mapContainer.dataset.mapsUrl = CLIENT.googleMapsEmbedUrl;
       }
+      if (CLIENT.googleMapsLink && !CLIENT.googleMapsLink.startsWith('[')) {
+        mapContainer.dataset.mapsLink = CLIENT.googleMapsLink;
+      }
       if (CLIENT.name && !CLIENT.name.startsWith('[')) {
         mapContainer.dataset.mapsTitle = `Standort ${CLIENT.name} – ${CLIENT.strasse}, ${CLIENT.plz} ${CLIENT.ort}`;
       }
     }
 
     // ── 11. ÖFFNUNGSZEITEN ────────────────────────────────
-    const oz = CLIENT.oeffnungszeiten;
-    set('[data-config="oeffMoDoBis"]', `${oz.moDoVon} – ${oz.moDoBis} Uhr`);
-    set('[data-config="oeffFrBis"]',   `${oz.frVon} – ${oz.frBis} Uhr`);
+    const oz = CLIENT.oeffnungszeiten || {};
+    const formatRange = ({ von, bis }) => `${von}–${bis}`;
+    const formatRanges = (ranges) => Array.isArray(ranges)
+      ? `${ranges.map(formatRange).join(' Uhr, ')} Uhr`
+      : '';
+    const moDoHours = formatRanges(oz.moDo);
+    const frHours = formatRanges(oz.fr);
+    set('[data-config="oeffMoDoBis"]', moDoHours);
+    set('[data-config="oeffFrBis"]', frHours);
 
     // ── 12. ÖFFNUNGSZEITEN KURZTEXT ───────────────────────
     document.querySelectorAll('[data-config="oeffZeitenKurz"]').forEach(el => {
-      el.textContent = `Mo–Do ${oz.moDoVon}–${oz.moDoBis} Uhr, Fr ${oz.frVon}–${oz.frBis} Uhr`;
+      if (moDoHours && frHours) {
+        el.textContent = `Mo–Do ${moDoHours} · Fr ${frHours}`;
+      }
     });
 
     // ── 13. FOOTER COPYRIGHT ──────────────────────────────
@@ -141,10 +152,36 @@
 
     // ── 14. SCHEMA.ORG JSON-LD ───────────────────────────
     const existingLd = document.querySelector('script[type="application/ld+json"]');
-    if (existingLd && CLIENT.name && !CLIENT.name.startsWith('[')) {
+    const ldRaw = existingLd?.textContent?.trim() || '';
+    const hasStaticGraph = ldRaw.includes('"@graph"') || existingLd?.id === 'schema-graph';
+    if (existingLd && hasStaticGraph) {
+      // Homepage @graph (FAQ, OfferCatalog, etc.) bleibt in index.html statisch.
+    } else if (existingLd && CLIENT.name && !CLIENT.name.startsWith('[')) {
+      const openingHoursSpecification = [];
+      if (Array.isArray(oz.moDo)) {
+        oz.moDo.forEach(({ von, bis }) => {
+          openingHoursSpecification.push({
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"],
+            "opens": von,
+            "closes": bis
+          });
+        });
+      }
+      if (Array.isArray(oz.fr)) {
+        oz.fr.forEach(({ von, bis }) => {
+          openingHoursSpecification.push({
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Friday",
+            "opens": von,
+            "closes": bis
+          });
+        });
+      }
       const schema = {
         "@context": "https://schema.org",
         "@type": CLIENT.branche,
+        "@id": CLIENT.domain,
         "name": CLIENT.name,
         "telephone": CLIENT.telefon,
         "email": CLIENT.email,
@@ -156,20 +193,8 @@
           "addressCountry": "DE"
         },
         "url": CLIENT.domain + '/',
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"],
-            "opens": CLIENT.oeffnungszeiten.moDoVon,
-            "closes": CLIENT.oeffnungszeiten.moDoBis
-          },
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": "Friday",
-            "opens": CLIENT.oeffnungszeiten.frVon,
-            "closes": CLIENT.oeffnungszeiten.frBis
-          }
-        ]
+        "hasMap": CLIENT.googleMapsLink || CLIENT.googleBewertungsLink,
+        "openingHoursSpecification": openingHoursSpecification
       };
       if (CLIENT.geoLat && !CLIENT.geoLat.startsWith('[')) {
         schema.geo = { "@type": "GeoCoordinates", "latitude": CLIENT.geoLat, "longitude": CLIENT.geoLng };
@@ -391,7 +416,85 @@
       }
     });
 
-    // ── 26. DATENSCHUTZ: aufsichtsbehoerde Direktlink ────
+    // ── 26. FAQ-AKKORDEON ─────────────────────────────────
+    const renderFaq = () => {
+      const list = document.querySelector('[data-faq-list]');
+      if (!list || !Array.isArray(CLIENT.faq) || !CLIENT.faq.length) return;
+
+      const escapeHtml = (str) => String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+
+      list.innerHTML = CLIENT.faq.map((item, index) => {
+        const frage = item.frage || item.q || '';
+        const antwort = item.antwort || item.a || '';
+        if (!frage || String(frage).startsWith('[')) return '';
+        return `
+          <details class="faq-item" id="faq-${index}">
+            <summary class="faq-item__q">${escapeHtml(frage)}</summary>
+            <div class="faq-item__body">
+              <p class="faq-item__a">${escapeHtml(antwort)}</p>
+            </div>
+          </details>`;
+      }).join('');
+    };
+
+    renderFaq();
+
+    // ── 27. PARTNER-KARUSSELL ─────────────────────────────
+    const renderPartners = () => {
+      if (!Array.isArray(CLIENT.partner) || !CLIENT.partner.length) return;
+
+      const scriptEl = document.querySelector('script[src*="config-apply"]');
+      const scriptSrc = scriptEl?.getAttribute('src') || '';
+      const imgPrefix = scriptSrc.includes('/leistungen/') ? '../images/' : 'images/';
+
+      const escapeHtml = (str) => String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+
+      const buildCard = (partner) => {
+        const name = partner.name || '';
+        const url = partner.url && !String(partner.url).startsWith('[') ? partner.url : '';
+        const logo = partner.logo && !String(partner.logo).startsWith('[') ? partner.logo : '';
+        let inner = '';
+        if (logo) {
+          const logoSrc = logo.startsWith('http') ? logo : `${imgPrefix}${logo.replace(/^\/?images\//, '')}`;
+          inner = `<img class="partner-card__img" src="${escapeHtml(logoSrc)}" alt="${escapeHtml(name)}" loading="lazy" decoding="async">`;
+        } else {
+          inner = `<span class="partner-card__label">${escapeHtml(name)}</span>`;
+        }
+        if (url) {
+          return `<a class="partner-card" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
+        }
+        return `<span class="partner-card partner-card--text">${inner}</span>`;
+      };
+
+      document.querySelectorAll('[data-partner-track]').forEach(container => {
+        const cardsHtml = CLIENT.partner.map(buildCard).join('');
+        const compact = container.hasAttribute('data-partner-compact');
+        const marquee = document.createElement('div');
+        marquee.className = `partner-marquee${compact ? ' partner-marquee--compact' : ''}`;
+        if (CLIENT.partnerBgColor && !String(CLIENT.partnerBgColor).startsWith('[')) {
+          marquee.style.setProperty('--partner-bg', CLIENT.partnerBgColor);
+        }
+        const track = document.createElement('div');
+        track.className = 'partner-marquee__track';
+        track.setAttribute('aria-label', 'Partner und Netzwerk');
+        track.innerHTML = cardsHtml + cardsHtml;
+        marquee.appendChild(track);
+        container.innerHTML = '';
+        container.appendChild(marquee);
+      });
+    };
+
+    renderPartners();
+
+    // ── 28. DATENSCHUTZ: aufsichtsbehoerde Direktlink ────
     // Hinweis: href wird bereits durch Sektion 4 (data-config-href="aufsichtsbehoerde") gesetzt.
     // Textinhalt wird durch Sektion 3 (data-config="aufsichtsbehoerde") auf dem Kind-Element gesetzt.
     // Diese Sektion dient als Sicherheitsnetz für Seiten, die nur das <a> ohne Span nutzen.

@@ -1,7 +1,7 @@
 // ============================================================
 //  HANDWERKER TEMPLATE — Kundenkonfiguration
 //  Alle kundespezifischen Werte hier eintragen.
-//  Bilder: logo-client.*, favicon-client.png, hero-poster.*
+//  Bilder: logo-client.png, favicon-client.png, hero-video.mp4, ref_*.jpg
 // ============================================================
 const CLIENT = {
   // ── FIRMA ──────────────────────────────────────────────────
@@ -12,7 +12,7 @@ const CLIENT = {
   berufsbezeichnung:    "[BERUFSBEZEICHNUNG]",
   gruendungsjahr:       "[GRUENDUNGSJAHR]",
   slogan:               "[SLOGAN]",
-  heroEyebrow:          "[AUSZEICHNUNG] · [ORT] · seit [GRUENDUNGSJAHR]",
+  heroEyebrow:          "[AUSZEICHNUNG] · [ORT]",
   leistungenKurz:       "[LEISTUNGEN_KURZ]",
 
   // ── KONTAKT & ADRESSE ──────────────────────────────────────
@@ -20,9 +20,9 @@ const CLIENT = {
   plz:            "[PLZ]",
   ort:            "[ORT]",
   telefon:        "+49[VORWAHL][NUMMER]",
-  telefonDisplay: "+49 (0)[VORWAHL] [NUMMER]",
+  telefonDisplay: "[TELEFON_DISPLAY]",
   fax:            "+49[VORWAHL][FAX]",
-  faxDisplay:     "+49 (0)[VORWAHL] [FAX]",
+  faxDisplay:     "[FAX_DISPLAY]",
   email:          "[EMAIL@DOMAIN.DE]",
 
   // ── ONLINE ─────────────────────────────────────────────────
@@ -33,28 +33,37 @@ const CLIENT = {
 
   // ── WHATSAPP ───────────────────────────────────────────────
   // Leer lassen ("") um WhatsApp-Button zu deaktivieren.
-  // Format: internationale Nummer ohne Leerzeichen, z. B. "+4917612345678"
   whatsapp:            "",
   whatsappVornachricht: "Hallo, ich interessiere mich für Ihre Leistungen und würde gerne mehr erfahren.",
 
   // ── TERMINBUCHUNG VARIANTE ─────────────────────────────────
-  // "calcom"   → Cal.com Embed hinter Consent-Gate (Standard)
-  // "whatsapp" → Großer WhatsApp-Button (kein externer Embed-Dienst)
-  // "formular" → Einfaches Terminanfrage-Formular via Web3Forms
-  terminVariante: "calcom",
+  // "rueckruf" → Telefon + WhatsApp + Rückruf-Formular (mailto) — Demo-Standard
+  // "calcom"   → Cal.com Embed hinter Consent-Gate
+  // "whatsapp" → Großer WhatsApp-Button
+  // "formular" → Terminanfrage-Formular via Web3Forms
+  terminVariante: "rueckruf",
+
+  // ── FORMULARE ──────────────────────────────────────────────
+  // "mailto" bis Web3Forms-Key vor Go-Live; "web3forms" mit echtem Key
+  formularModus: "mailto",
 
   // ── GOOGLE ─────────────────────────────────────────────────
   googleMapsEmbedUrl:    "[GOOGLE_MAPS_EMBED_URL]",
+  googleMapsLink:        "[GOOGLE_MAPS_LINK]",
   googleBewertungsLink:  "[GOOGLE_BEWERTUNGS_URL]",
-  googleBewertungAnzahl: "[ANZAHL]",
-  googleBewertungNote:   "[NOTE]",
+  googleBewertungAnzahl: "[BEWERTUNGEN_ANZAHL]",
+  googleBewertungNote:   "[BEWERTUNGEN_NOTE]",
 
   // ── ÖFFNUNGSZEITEN ─────────────────────────────────────────
   oeffnungszeiten: {
-    moDoVon: "08:00",
-    moDoBis: "17:00",
-    frVon:   "08:00",
-    frBis:   "13:00"
+    moDo: [
+      { von: "08:00", bis: "12:00" },
+      { von: "13:00", bis: "17:00" }
+    ],
+    fr: [
+      { von: "08:00", bis: "12:00" },
+      { von: "13:00", bis: "15:00" }
+    ]
   },
 
   // ── LEISTUNGEN (Startseite, 4 Karten) ──────────────────────
@@ -79,12 +88,9 @@ const CLIENT = {
   warum4Text:  "[USP_4_TEXT]",
 
   // ── REFERENZEN ─────────────────────────────────────────────
-  referenzenIntro: "Auswahl abgeschlossener Projekte aus [ORT] und Umgebung.",
+  referenzenIntro: "[REFERENZEN_INTRO]",
 
   // ── ÜBER UNS TEXT ──────────────────────────────────────────
-  // Array mit je einem Absatz als String. config-apply.js rendert
-  // diese als <p>-Elemente in die .familie-body Section.
-  // Empfohlen: 3–4 Absätze. HTML-Tags sind erlaubt (z.B. <strong>).
   ueberUns: [
     "[ÜBER_UNS_ABSATZ_1]",
     "[ÜBER_UNS_ABSATZ_2]",
@@ -92,11 +98,9 @@ const CLIENT = {
   ],
 
   // ── DOKUMENT-BILDER (Über-uns-Sektion) ─────────────────────
-  // Dateiname ohne Extension (Dateien: images/<name>.jpg + images/<name>.webp).
-  // Leer lassen ("") um ein Dokument-Bild auszublenden.
-  dokBild1: "meisterbrief",    // Meisterbrief
-  dokBild2: "meisterbrief2",   // Zweites Zertifikat
-  dokBild3: "urkunde",         // Urkunde / Auszeichnung
+  dokBild1: "",
+  dokBild2: "",
+  dokBild3: "",
 
   // ── TEAM (team.html, bis zu 3 Mitglieder) ──────────────────
   team1Name:  "[TEAM_1_NAME]",
@@ -110,64 +114,57 @@ const CLIENT = {
   team3Init:  "C",
 
   // ── KOSTENRECHNER ──────────────────────────────────────────
-  // Auf false setzen um den Kostenrechner komplett auszublenden
-  // (inkl. Navigation). Sinnvoll für Betriebe ohne Flächenpreise.
   kostenrechnerAktiv: true,
 
-  // ── KOSTENRECHNER PREISE (€/m²) ────────────────────────────
   preise: {
-    standard:           135,
-    premium:            240,
-    xl:                 330,
-    altbelagEntfernen:  45,
-    abdichtung:         60,
-    fussbodenheizung:   28
+    standard:           18,
+    premium:            28,
+    xl:                 22,
+    altbelagEntfernen:  8,
+    abdichtung:         15,
+    fussbodenheizung:   12
   },
 
   calcProjekte: [
-    { id: "bath",    label: "[PROJEKTTYP_1]", multi: 1.3  },
-    { id: "floor",   label: "[PROJEKTTYP_2]", multi: 1.0  },
-    { id: "terrace", label: "[PROJEKTTYP_3]", multi: 1.15 },
-    { id: "repair",  label: "[PROJEKTTYP_4]", multi: 0.9  }
+    { id: "bath",    label: "[PROJEKTTYP_1]", multi: 1.0  },
+    { id: "floor",   label: "[PROJEKTTYP_2]", multi: 0.9  },
+    { id: "terrace", label: "[PROJEKTTYP_3]", multi: 1.3  },
+    { id: "repair",  label: "[PROJEKTTYP_4]", multi: 1.15 }
   ],
   calcMaterialien: [
-    { id: "standard", label: "[MATERIAL_1]", desc: "[MATERIAL_1_DESC] ca. 135 €/m²" },
-    { id: "premium",  label: "[MATERIAL_2]", desc: "[MATERIAL_2_DESC] ca. 240 €/m²" },
-    { id: "xl",       label: "[MATERIAL_3]", desc: "[MATERIAL_3_DESC] ca. 330 €/m²" }
+    { id: "standard", label: "[MATERIAL_1]", desc: "[MATERIAL_1_DESC]" },
+    { id: "premium",  label: "[MATERIAL_2]", desc: "[MATERIAL_2_DESC]" },
+    { id: "xl",       label: "[MATERIAL_3]", desc: "[MATERIAL_3_DESC]" }
   ],
   calcExtras: [
-    { id: "debris",        label: "[EXTRA_1]", desc: "+ ca. 45 €/m²"  },
-    { id: "waterproofing", label: "[EXTRA_2]", desc: "+ ca. 60 €/m²"  },
-    { id: "floorHeating",  label: "[EXTRA_3]", desc: "+ ca. 28 €/m²"  }
+    { id: "debris",        label: "[EXTRA_1]", desc: "[EXTRA_1_DESC]" },
+    { id: "waterproofing", label: "[EXTRA_2]", desc: "[EXTRA_2_DESC]" },
+    { id: "floorHeating",  label: "[EXTRA_3]", desc: "[EXTRA_3_DESC]" }
   ],
 
   // ── KONTAKTFORMULAR ────────────────────────────────────────
-  // Auf false setzen um das Formular auszublenden (nur Adresse/Tel/WA).
   kontaktformularAktiv: true,
 
-  // Anliegen-Optionen für das Kontaktformular-Dropdown.
-  // config-apply.js ersetzt die hardcodierten HTML-Optionen damit.
   kontaktAnliegen: [
-    { value: "beratung",    label: "Beratung / Angebot anfragen"  },
-    { value: "reparatur",   label: "Reparatur / Sanierung"        },
-    { value: "allgemein",   label: "Allgemeine Anfrage"           }
+    { value: "beratung",  label: "Beratung / Angebot anfragen" },
+    { value: "projekt",   label: "[ANLIEGEN_2]" },
+    { value: "sanierung", label: "[ANLIEGEN_3]" },
+    { value: "allgemein", label: "Allgemeine Anfrage" }
   ],
 
   // ── SOCIAL MEDIA ───────────────────────────────────────────
   facebook:  "",
   instagram: "",
 
-  // ── FARBEN ─────────────────────────────────────────────────
-  // Überschreibt CSS Custom Properties aus variables.css.
-  // Alle Felder sind optional — nur ausgefüllte Werte werden angewendet.
+  // ── FARBEN (optional) ──────────────────────────────────────
   colors: {
-    primary:      "",   // z. B. "#1a2b4c"
-    primaryDark:  "",   // z. B. "#0d1526"
-    primaryMid:   "",   // z. B. "#243a61"
-    primaryLight: "",   // z. B. "#3d5580"
-    accent:       "",   // z. B. "#2980b9"
-    accentHover:  "",   // z. B. "#2471a3"
-    accentLight:  ""    // z. B. "#d6eaf8"
+    primary:      "",
+    primaryDark:  "",
+    primaryMid:   "",
+    primaryLight: "",
+    accent:       "",
+    accentHover:  "",
+    accentLight:  ""
   },
 
   // ── SEO & SCHEMA.ORG ───────────────────────────────────────
@@ -175,21 +172,57 @@ const CLIENT = {
   geoLat:   "[LAT]",
   geoLng:   "[LNG]",
 
-  // ── KAMMER & VERBAND (für Impressum) ───────────────────────
+  // ── KAMMER & VERBAND ───────────────────────────────────────
   kammer:      "[KAMMERBEZEICHNUNG], [KAMMERORT]",
   fachverband: "[FACHVERBAND_NAME]",
 
   // ── DATENSCHUTZ ────────────────────────────────────────────
-  // Für die Datenschutzerklärung: zuständige Aufsichtsbehörde
-  bundesland:          "[BUNDESLAND]",
-  aufsichtsbehoerde:   "[NAME_DER_AUFSICHTSBEHOERDE]",
-  aufsichtsbehoerdeUrl:"[URL_AUFSICHTSBEHOERDE]",
+  bundesland:           "[BUNDESLAND]",
+  aufsichtsbehoerde:    "[NAME_DER_AUFSICHTSBEHOERDE]",
+  aufsichtsbehoerdeUrl: "[URL_AUFSICHTSBEHOERDE]",
 
   // ── TEAM & STATS ───────────────────────────────────────────
   jahreErfahrung:    "[JAHRE]+",
-  teamGroesse:       "[ANZAHL]",
-  bewertungenAnzahl: "[ANZAHL]",
+  teamGroesse:       "[TEAM_GROESSE]",
+  bewertungenAnzahl: "[BEWERTUNGEN_ANZAHL]",
+
+  // ── PARTNER-KARUSSELL ──────────────────────────────────────
+  partnerIntro: "[PARTNER_INTRO]",
+  partnerBgColor: "var(--secondary-dark, #1c1a14)",
+  partner: [
+    { name: "[PARTNER_1]", url: "https://[PARTNER_1_DOMAIN].de/", logo: "" },
+    { name: "[PARTNER_2]", url: "https://[PARTNER_2_DOMAIN].de/", logo: "" },
+    { name: "[PARTNER_3]", url: "", logo: "" }
+  ],
+
+  // ── FAQ (Akkordeon neben Kontaktformular, min. 6) ──────────
+  faq: [
+    {
+      frage: "Welche Leistungen bieten Sie in [ORT] an?",
+      antwort: "[FAQ_1_ANTWORT]"
+    },
+    {
+      frage: "In welcher Region sind Sie tätig?",
+      antwort: "[FAQ_2_ANTWORT]"
+    },
+    {
+      frage: "Wie läuft eine Anfrage ab?",
+      antwort: "Sie erreichen uns telefonisch, per E-Mail, über das Kontaktformular oder die Rückruf-Anfrage. Wir besprechen Umfang und Zeitplan in einem unverbindlichen Gespräch."
+    },
+    {
+      frage: "[FAQ_4_FRAGE]",
+      antwort: "[FAQ_4_ANTWORT]"
+    },
+    {
+      frage: "[FAQ_5_FRAGE]",
+      antwort: "[FAQ_5_ANTWORT]"
+    },
+    {
+      frage: "Erstellen Sie kostenlose Angebote?",
+      antwort: "Ja. Nach Ihrer Anfrage klären wir den Umfang und erstellen auf Wunsch ein unverbindliches Angebot — vor Ort oder telefonisch."
+    }
+  ],
 
   // ── INTERN ─────────────────────────────────────────────────
-  klaroStorageName: "handwerker-consent-v1"
+  klaroStorageName: "[KUNDE]-consent-v1"
 };

@@ -47,88 +47,75 @@
     });
   }
 
-  /* === SCROLL INDICATOR === */
-  const scrollIndicator = document.getElementById('scrollIndicator');
-  if (scrollIndicator) {
-    const hideIndicator = () => {
-      if (window.scrollY > 120) {
-        scrollIndicator.classList.add('hidden');
-        window.removeEventListener('scroll', hideIndicator);
-      }
+  /* === NAV: Leistungen dropdown (desktop) === */
+  const navDropdown = document.querySelector('.nav__item--dropdown');
+  const navDropdownBtn = document.getElementById('navLeistungenBtn');
+  const navDropdownMenu = document.getElementById('navLeistungenMenu');
+
+  if (navDropdown && navDropdownBtn && navDropdownMenu) {
+    const desktopNav = window.matchMedia('(min-width: 901px)');
+    let closeTimer = null;
+
+    const openDropdown = () => {
+      navDropdown.classList.add('is-open');
+      navDropdownBtn.setAttribute('aria-expanded', 'true');
+      navDropdownMenu.removeAttribute('hidden');
     };
-    window.addEventListener('scroll', hideIndicator, { passive: true });
+
+    const closeDropdown = () => {
+      navDropdown.classList.remove('is-open');
+      navDropdownBtn.setAttribute('aria-expanded', 'false');
+      navDropdownMenu.setAttribute('hidden', '');
+    };
+
+    const scheduleClose = () => {
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(closeDropdown, 120);
+    };
+
+    navDropdownBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (navDropdown.classList.contains('is-open')) closeDropdown();
+      else openDropdown();
+    });
+
+    navDropdownMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeDropdown);
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navDropdown.contains(e.target)) closeDropdown();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDropdown();
+    });
+
+    const bindHover = () => {
+      if (!desktopNav.matches) return;
+      navDropdown.addEventListener('mouseenter', () => {
+        clearTimeout(closeTimer);
+        openDropdown();
+      });
+      navDropdown.addEventListener('mouseleave', scheduleClose);
+      navDropdownMenu.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+      navDropdownMenu.addEventListener('mouseleave', scheduleClose);
+    };
+
+    bindHover();
+    desktopNav.addEventListener('change', () => {
+      closeDropdown();
+    });
   }
 
-  const heroSection = document.getElementById('hero');
-  const heroSticky = document.getElementById('heroSticky');
-  if (heroSection && heroSticky) {
-    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
-    const lerp = (a, b, t) => a + (b - a) * t;
-    const heroFxMobileMq = window.matchMedia('(max-width: 768px)');
-    const heroFxReducedMq = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    const resetHeroFx = () => {
-      heroSection.style.setProperty('--hero-scale', '1');
-      heroSection.style.setProperty('--hero-radius', '0px');
-      heroSection.style.setProperty('--hero-overlay-opacity', '1');
-      heroSection.style.setProperty('--hero-content-y', '0px');
-      heroSection.style.setProperty('--hero-content-opacity', '1');
+  /* === HERO: Scroll indicator (hide after first scroll) === */
+  const scrollIndicator = document.getElementById('scrollIndicator');
+  if (scrollIndicator) {
+    const updateScrollIndicator = () => {
+      scrollIndicator.classList.toggle('hidden', window.scrollY > 80);
     };
-
-    const heroFxEnabled = () => !heroFxMobileMq.matches && !heroFxReducedMq.matches;
-
-    const updateHeroProgress = () => {
-      if (!heroFxEnabled()) {
-        resetHeroFx();
-        return;
-      }
-
-      const rect = heroSection.getBoundingClientRect();
-      const total = Math.max(1, rect.height - window.innerHeight);
-      const progress = clamp(-rect.top / total, 0, 1);
-
-      const scale = lerp(1, 0.82, progress);
-      const radius = lerp(0, 28, progress);
-      const overlayOpacity = lerp(1, 0.5, progress);
-      const contentY = lerp(0, -72, clamp(progress / 0.42, 0, 1));
-      const contentOpacity = progress < 0.35 ? lerp(1, 0, clamp(progress / 0.35, 0, 1)) : 0;
-
-      heroSection.style.setProperty('--hero-scale', String(scale));
-      heroSection.style.setProperty('--hero-radius', `${radius}px`);
-      heroSection.style.setProperty('--hero-overlay-opacity', String(overlayOpacity));
-      heroSection.style.setProperty('--hero-content-y', `${contentY}px`);
-      heroSection.style.setProperty('--hero-content-opacity', String(contentOpacity));
-    };
-
-    let heroFxScrollBound = false;
-
-    const syncHeroFx = () => {
-      if (heroFxEnabled()) {
-        if (!heroFxScrollBound) {
-          window.addEventListener('scroll', updateHeroProgress, { passive: true });
-          heroFxScrollBound = true;
-        }
-        updateHeroProgress();
-      } else {
-        if (heroFxScrollBound) {
-          window.removeEventListener('scroll', updateHeroProgress);
-          heroFxScrollBound = false;
-        }
-        resetHeroFx();
-      }
-    };
-
-    const onHeroFxChange = () => syncHeroFx();
-
-    syncHeroFx();
-    window.addEventListener('resize', onHeroFxChange);
-    if (typeof heroFxMobileMq.addEventListener === 'function') {
-      heroFxMobileMq.addEventListener('change', onHeroFxChange);
-      heroFxReducedMq.addEventListener('change', onHeroFxChange);
-    } else {
-      heroFxMobileMq.addListener(onHeroFxChange);
-      heroFxReducedMq.addListener(onHeroFxChange);
-    }
+    window.addEventListener('scroll', updateScrollIndicator, { passive: true });
+    updateScrollIndicator();
   }
 
   const internalLinks = document.querySelectorAll('a[href^="#"]');
@@ -298,6 +285,14 @@
     return '';
   };
 
+  const getMapsLink = () => {
+    if (realMapContainer?.dataset.mapsLink) return realMapContainer.dataset.mapsLink;
+    if (typeof CLIENT !== 'undefined') {
+      return CLIENT.googleMapsLink || CLIENT.googleBewertungsLink || '';
+    }
+    return '';
+  };
+
   const getMapsIframeTitle = () => {
     if (realMapContainer?.dataset.mapsTitle) return realMapContainer.dataset.mapsTitle;
     if (typeof CLIENT !== 'undefined' && CLIENT.name && !CLIENT.name.startsWith('[')) {
@@ -309,7 +304,18 @@
   const mountMapIframe = () => {
     if (!realMapContainer || realMapContainer.querySelector('iframe')) return;
     const embedUrl = getMapsEmbedUrl();
-    if (!embedUrl) return;
+    if (!embedUrl) {
+      const mapsLink = getMapsLink();
+      if (!mapsLink) return;
+      const link = document.createElement('a');
+      link.href = mapsLink;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.className = 'btn btn--primary';
+      link.textContent = 'Route auf Google Maps öffnen';
+      realMapContainer.appendChild(link);
+      return;
+    }
     const iframe = document.createElement('iframe');
     iframe.src = embedUrl;
     iframe.title = getMapsIframeTitle();
@@ -375,50 +381,168 @@
   renderBookingState();
   renderMapState();
 
+  /* === FORM MAILTO FALLBACK (bis Web3Forms-Key gesetzt) === */
+  const usesMailtoForm = () => {
+    if (typeof CLIENT === 'undefined') return true;
+    if (CLIENT.formularModus === 'mailto') return true;
+    const key = String(CLIENT.web3formsKey || '').trim();
+    return !key
+      || key.startsWith('[')
+      || key === 'YOUR_WEB3FORMS_ACCESS_KEY'
+      || key === '[WEB3FORMS_ACCESS_KEY]';
+  };
+
+  const getClientEmail = () => {
+    if (typeof CLIENT !== 'undefined' && CLIENT.email && !String(CLIENT.email).startsWith('[')) {
+      return CLIENT.email;
+    }
+    return 'info@example.de';
+  };
+
+  const openMailto = (subject, bodyLines) => {
+    const body = bodyLines.filter((line) => line !== undefined && line !== null).join('\n');
+    const mailto = `mailto:${encodeURIComponent(getClientEmail())}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  };
+
+  const buildContactMailtoBody = (form) => {
+    const formData = new FormData(form);
+    const anfrageSelect = form.querySelector('#anfrageart');
+    const anfrageLabel = anfrageSelect?.selectedOptions?.[0]?.textContent
+      || formData.get('anfrageart')
+      || '';
+    return [
+      `Vorname: ${formData.get('vorname') || ''}`,
+      `Nachname: ${formData.get('nachname') || ''}`,
+      `Telefon: ${formData.get('telefon') || ''}`,
+      `E-Mail: ${formData.get('email') || ''}`,
+      `Anliegen: ${anfrageLabel}`,
+      '',
+      String(formData.get('nachricht') || '').trim()
+    ];
+  };
+
+  const submitWeb3Form = async (form, resultEl, successText) => {
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) submitButton.disabled = true;
+
+    const formData = new FormData(form);
+    const accessKey = String(formData.get('access_key') || '').trim();
+    const honeypot = String(formData.get('website') || '').trim();
+    if (honeypot) {
+      if (resultEl) resultEl.textContent = 'Anfrage blockiert.';
+      if (submitButton) submitButton.disabled = false;
+      return;
+    }
+    if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY' || accessKey === '[WEB3FORMS_ACCESS_KEY]') {
+      if (resultEl) resultEl.textContent = 'Bitte zuerst den echten Web3Forms Access Key eintragen.';
+      if (submitButton) submitButton.disabled = false;
+      return;
+    }
+
+    try {
+      const response = await fetch(form.action || 'https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data?.message || 'Anfrage konnte nicht gesendet werden.');
+      }
+      if (resultEl) resultEl.textContent = successText;
+      form.reset();
+    } catch (error) {
+      if (resultEl) resultEl.textContent = `Fehler: ${error.message}`;
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
+  };
+
+  /* === FAQ: ein Akkordeon offen === */
+  const faqList = document.querySelector('[data-faq-list]');
+  if (faqList) {
+    faqList.addEventListener('toggle', (event) => {
+      const item = event.target;
+      if (!item.matches('.faq-item') || !item.open) return;
+      faqList.querySelectorAll('.faq-item[open]').forEach((other) => {
+        if (other !== item) other.open = false;
+      });
+    }, true);
+  }
+
   /* === CONTACT FORM === */
   const contactForm = document.getElementById('kontaktForm');
   if (contactForm) {
     contactForm.addEventListener('submit', async (event) => {
       event.preventDefault();
       const message = document.getElementById('kontaktFormResult');
-      const submitButton = contactForm.querySelector('button[type="submit"]');
-      if (submitButton) submitButton.disabled = true;
-
-      const formData = new FormData(contactForm);
-      const accessKey = String(formData.get('access_key') || '').trim();
-      const honeypot = String(formData.get('website') || '').trim();
+      const honeypot = String(new FormData(contactForm).get('website') || '').trim();
       if (honeypot) {
         if (message) message.textContent = 'Anfrage blockiert.';
-        if (submitButton) submitButton.disabled = false;
-        return;
-      }
-      if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
-        if (message) message.textContent = 'Bitte zuerst den echten Web3Forms Access Key eintragen.';
-        if (submitButton) submitButton.disabled = false;
         return;
       }
 
-      try {
-        const response = await fetch(contactForm.action, {
-          method: 'POST',
-          body: formData
-        });
-
-        const data = await response.json();
-        if (!response.ok) {
-          throw new Error(data?.message || 'Anfrage konnte nicht gesendet werden.');
-        }
+      if (usesMailtoForm()) {
+        openMailto('Kontaktanfrage über Website', buildContactMailtoBody(contactForm));
         if (message) {
-          message.textContent = 'Danke! Ihre Anfrage wurde erfolgreich übermittelt.';
+          message.textContent = 'Ihr E-Mail-Programm öffnet sich — bitte senden Sie die Nachricht dort ab.';
         }
-        contactForm.reset();
-      } catch (error) {
-        if (message) {
-          message.textContent = `Fehler: ${error.message}`;
-        }
-      } finally {
-        if (submitButton) submitButton.disabled = false;
+        return;
       }
+
+      await submitWeb3Form(
+        contactForm,
+        message,
+        'Danke! Ihre Anfrage wurde erfolgreich übermittelt.'
+      );
+    });
+  }
+
+  /* === RÜCKRUF-FORMULAR (#termin) === */
+  const rueckrufForm = document.getElementById('rueckrufForm');
+  if (rueckrufForm) {
+    rueckrufForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const result = document.getElementById('rueckrufFormResult');
+      const formData = new FormData(rueckrufForm);
+      openMailto('Rückrufanfrage', [
+        `Name: ${formData.get('name') || ''}`,
+        `Telefon: ${formData.get('telefon') || ''}`,
+        `Wunschzeit: ${formData.get('wunschzeit') || '—'}`,
+        '',
+        String(formData.get('nachricht') || '').trim()
+      ]);
+      if (result) {
+        result.textContent = 'Ihr E-Mail-Programm öffnet sich — bitte senden Sie die Rückrufanfrage dort ab.';
+      }
+    });
+  }
+
+  /* === TERMIN-FORMULAR (Web3Forms-Variante) === */
+  const terminForm = document.getElementById('terminForm');
+  if (terminForm) {
+    terminForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const result = document.getElementById('terminFormResult');
+      if (usesMailtoForm()) {
+        const formData = new FormData(terminForm);
+        openMailto('Terminanfrage', [
+          `Name: ${formData.get('name') || ''}`,
+          `Telefon: ${formData.get('telefon') || ''}`,
+          `Wunschtermin: ${formData.get('wunschtermin') || '—'}`,
+          '',
+          String(formData.get('nachricht') || '').trim()
+        ]);
+        if (result) {
+          result.textContent = 'Ihr E-Mail-Programm öffnet sich — bitte senden Sie die Terminanfrage dort ab.';
+        }
+        return;
+      }
+      await submitWeb3Form(
+        terminForm,
+        result,
+        'Ihre Terminanfrage wurde gesendet — wir melden uns bald!'
+      );
     });
   }
 

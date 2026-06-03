@@ -1,0 +1,23 @@
+# [FIRMENNAME] — llms.txt
+# Handwerker-Website-Vorlage (RAIS)
+# Canonical host: https://www.[DOMAIN].de
+
+## Business
+- **Legal name:** [FIRMENNAME]
+- **Trade:** [HANDWERKSBEZEICHNUNG] / [BERUFSBEZEICHNUNG]
+- **Address:** [STRASSE_NR], [PLZ] [ORT], Germany
+- **Phone:** [TELEFON_DISPLAY]
+- **Email:** [EMAIL@DOMAIN.DE]
+
+## Services (examples — adjust per customer)
+- Innenarbeiten: https://www.[DOMAIN].de/leistungen/innenarbeiten.html
+- Fassade: https://www.[DOMAIN].de/leistungen/fassade.html
+- Bodenbeläge: https://www.[DOMAIN].de/leistungen/bodenbelaege.html
+- Schimmelbeseitigung: https://www.[DOMAIN].de/leistungen/schimmelbeseitigung.html
+
+## Key pages
+- Home: https://www.[DOMAIN].de/
+- Contact: https://www.[DOMAIN].de/#kontakt
+- Callback: https://www.[DOMAIN].de/#termin
+- Sitemap: https://www.[DOMAIN].de/sitemap.xml
+- Facts (JSON): https://www.[DOMAIN].de/business-profile.json

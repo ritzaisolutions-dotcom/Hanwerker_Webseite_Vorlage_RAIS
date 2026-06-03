@@ -1,6 +1,7 @@
-# Handwerker Website Template — Setup-Anleitung
+# Handwerker Website Template — Setup-Anleitung (RAIS)
 
-**Ziel:** Neuer Kundendeploy in **4–6 Stunden** (config.js + Texte + Bilder + Rechtliches prüfen).
+**Ziel:** Neuer Kundendeploy in **4–6 Stunden**.
+**Sektionen-Reihenfolge und Hero-Aufbau:** siehe `CLAUDE.md §3 + §4` — nicht abweichen.
 
 ---
 
@@ -8,9 +9,9 @@
 
 - [ ] GitHub-Account (Repo klonen/forken)
 - [ ] Vercel-Account (kostenlos auf vercel.com)
-- [ ] Web3Forms-Account (kostenlos auf web3forms.com)
-- [ ] Cal.com-Account (kostenlos auf cal.com)
-- [ ] Kundenmaterialien: Logo, Bilder, Kontaktdaten, Google-Profil-Link
+- [ ] Web3Forms-Account (kostenlos auf web3forms.com) — für Kontaktformular
+- [ ] Cal.com-Account (kostenlos auf cal.com) — für Terminbuchung
+- [ ] Kundenmaterialien: Logo (SVG/PNG), Bilder, Kontaktdaten, Google-Profil-Link, Partner-Liste
 
 ---
 
@@ -18,253 +19,329 @@
 
 Öffne `website/js/config.js` und ersetze **alle** `[PLACEHOLDER]`-Werte.
 
-### Pflichtfelder
+### 2a) Pflichtfelder — Firma & Kontakt
 
 | Feld | Beschreibung | Beispiel |
 |------|-------------|---------|
-| `name` | Vollständiger Firmenname | `"Peter Butz Fliesenfachbetrieb"` |
-| `nameKurz` | Nachname oder Kurzform (erscheint groß im Hero) | `"Butz"` |
-| `unternehmenstyp` | Betriebsform | `"Fliesenfachbetrieb"` |
-| `handwerksbezeichnung` | Berufsbezeichnung singular | `"Fliesenleger"` |
-| `berufsbezeichnung` | Vollständiger Meistertitel | `"Fliesenlegermeister"` |
-| `gruendungsjahr` | Gründungsjahr (4-stellig) | `"1997"` |
-| `slogan` | 1–2 Sätze USP-Aussage | `"Von der Planung bis zur Übergabe."` |
-| `heroEyebrow` | Kleine Zeile über H1 | `"Meisterbetrieb · Römerberg · seit 1997"` |
-| `strasse` | Straße + Hausnummer | `"Werkstraße 23"` |
-| `plz` | Postleitzahl | `"67354"` |
-| `ort` | Ort | `"Römerberg"` |
-| `telefon` | Tel ohne Leerzeichen für href | `"+4962328311"` |
-| `telefonDisplay` | Tel Anzeigeformat | `"+49 (0)6232 83111"` |
-| `email` | E-Mail-Adresse | `"info@fliesen-butz.de"` |
-| `domain` | Live-Domain ohne trailing slash | `"https://www.fliesen-butz.de"` |
-| `web3formsKey` | Web3Forms Access Key (→ Schritt 5) | `"099dd006-..."` |
-| `calcomLink` | Cal.com Buchungs-URL (→ Schritt 6) | `"https://cal.com/butz/beratung"` |
-| `googleMapsEmbedUrl` | Google Maps Embed-URL (→ Schritt 7) | `"https://www.google.com/maps/embed?..."` |
-| `googleBewertungsLink` | Link zum Google-Bewertungsprofil | `"https://g.page/..."` |
-| `googleBewertungAnzahl` | Anzahl Bewertungen als String | `"38"` |
-| `googleBewertungNote` | Gesamtnote als String | `"5,0"` |
-| `geoLat` | GPS Breite (aus Google Maps) | `"49.2996"` |
-| `geoLng` | GPS Länge (aus Google Maps) | `"8.4030"` |
-| `kammer` | Handwerkskammer | `"Handwerkskammer der Pfalz, Kaiserslautern"` |
-| `fachverband` | Branchenverband | `"Fachverband Deutsches Fliesengewerbe"` |
-| `jahreErfahrung` | Jahre als String (z.B. "27+") | `"27+"` |
-| `teamGroesse` | Mitarbeiteranzahl als String | `"9"` |
-| `bewertungenAnzahl` | Anzahl Bewertungen | `"38"` |
+| `name` | Vollständiger Firmenname | `"Hans Schmitt Malerei e.K."` |
+| `nameKurz` | Kurzform für Hero-Logo-Bereich | `"Schmitt"` |
+| `unternehmenstyp` | Betriebsform | `"Malerbetrieb"` |
+| `handwerksbezeichnung` | Berufsbezeichnung singular | `"Maler"` |
+| `berufsbezeichnung` | Vollständiger Meistertitel | `"Malermeister"` |
+| `gruendungsjahr` | Gründungsjahr | `"1991"` |
+| `slogan` | 1–2 Sätze USP | `"Von der Wand bis zur Fassade."` |
+| `strasse` | Straße + Hausnr. | `"Emser Straße 80"` |
+| `plz` | PLZ | `"56076"` |
+| `ort` | Ort | `"Koblenz"` |
+| `telefon` | Tel für href (kein Leerzeichen) | `"+4926128744414"` |
+| `telefonDisplay` | Tel Anzeigeformat | `"0261 / 28744414"` |
+| `email` | E-Mail | `"info@malergeschaeft-schmitt.de"` |
+| `domain` | Live-Domain ohne trailing slash | `"https://malergeschaeft-schmitt.de"` |
 
-### Optionale Felder
+### 2b) Pflichtfelder — Hero & Navigation
+
+| Feld | Beschreibung | Beispiel |
+|------|-------------|---------|
+| `heroH1` | H1-Text im Hero (max. 5 Wörter) | `"Handwerk mit Haltung."` |
+| `heroEyebrow` | Kleine Zeile über H1 | `"Meisterbetrieb · Koblenz · seit 1991"` |
+| `heroCta` | CTA-Button-Text im Hero | `"Kostenloses Angebot"` |
+| `navCta` | CTA-Button-Text im Header | `"Angebot anfragen"` |
+| `whatsappText` | Vorausgefüllter WhatsApp-Text (URL-encoded) | `"Hallo%2C%20ich%20interessiere%20mich..."` |
+
+### 2c) Pflichtfelder — Trust Strip
+
+| Feld | Beschreibung | Beispiel |
+|------|-------------|---------|
+| `jahreErfahrung` | Jahre als String | `"30+"` |
+| `googleBewertungNote` | Note als String | `"4.8"` |
+| `googleBewertungAnzahl` | Anzahl Bewertungen | `"11"` |
+| `projekte` | Abgeschlossene Projekte | `"500+"` |
+| `teamGroesse` | Mitarbeiter | `"5"` |
+
+### 2d) Pflichtfelder — SEO & Maps
+
+| Feld | Beschreibung | Beispiel |
+|------|-------------|---------|
+| `web3formsKey` | Web3Forms Access Key | `"099dd006-..."` |
+| `calcomLink` | Cal.com Buchungs-URL | `"https://cal.com/schmitt/beratung"` |
+| `googleMapsEmbedUrl` | Google Maps Embed-URL | `"https://www.google.com/maps/embed?..."` |
+| `googleBewertungsLink` | Link zum Google-Profil | `"https://g.page/..."` |
+| `geoLat` | GPS Breite | `"50.3480602"` |
+| `geoLng` | GPS Länge | `"7.6047456"` |
+| `kammer` | Handwerkskammer | `"HWK Koblenz"` |
+| `fachverband` | Branchenverband | `"Maler- und Lackierer-Innung"` |
+
+### 2e) Pflichtfelder — Partner-Karussell
+
+```js
+partner: [
+  // Mit Link + Logo-Bild:
+  { name: "Brillux",            url: "https://brillux.de",          logo: "images/partner/brillux.webp" },
+  // Mit Link, kein Logo (Text-Karte):
+  { name: "ED Baucenter",       url: "https://ed-baucenter.de/",     logo: "" },
+  // Kein Link (kein <a>-Tag):
+  { name: "Elektro-Service X",  url: "",                             logo: "" },
+],
+partnerBgColor: "var(--primary)",  // Hintergrundfarbe der Partner-Sektion
+```
+
+### 2f) Pflichtfelder — FAQ
+
+Mindestens 6 Einträge. Werden im FAQ-Akkordeon neben dem Kontaktformular angezeigt.
+
+```js
+faq: [
+  {
+    frage: "Wie lange dauert ein typisches Projekt?",
+    antwort: "Das hängt vom Umfang ab — ein Zimmer streichen dauert 1–2 Tage, eine Fassade 1–2 Wochen."
+  },
+  {
+    frage: "Erstellen Sie kostenlose Angebote?",
+    antwort: "Ja, wir kommen gerne vor Ort und erstellen ein unverbindliches Angebot."
+  },
+  // ... weitere Einträge
+],
+```
+
+### 2g) Pflichtfelder — Leistungen & Kostenrechner
 
 | Feld | Beschreibung |
 |------|-------------|
-| `facebook` | Facebook-Profil-URL (leer lassen wenn nicht vorhanden) |
-| `instagram` | Instagram-Profil-URL (leer lassen wenn nicht vorhanden) |
-| `fax` / `faxDisplay` | Fax-Nummer (wenn vorhanden) |
+| `leistungenKurz` | Kurzliste für Meta-Description |
+| `leistung1Titel` … `leistung4Titel` | Titel der 4 Leistungskarten |
+| `leistung1Text` … `leistung4Text` | Beschreibungstext pro Karte |
+| `leistung1Items[]` … `leistung4Items[]` | Sub-Item-Listen pro Karte (min. 4 Punkte) |
+| `calcProjekte[]` | Projektkategorien im Rechner |
+| `calcMaterialien[]` | Materialoptionen im Rechner |
+| `calcExtras[]` | Zusatzleistungen im Rechner |
+| `preise.*` | Preise pro m² |
 
-### Kostenrechner anpassen
+### 2h) Optionale Felder
 
-Falls Leistungen/Materialien nicht zur Branche passen:
-- `calcProjekte[].label` — Projektkategorien umbenennen
-- `calcMaterialien[].label` und `.desc` — Materialbezeichnungen
-- `calcExtras[].label` und `.desc` — Zusatzleistungen
-- `preise.*` — Preise pro m² anpassen
+| Feld | Beschreibung |
+|------|-------------|
+| `facebook` | Facebook-URL (leer lassen wenn nicht vorhanden) |
+| `instagram` | Instagram-URL |
+| `fax` / `faxDisplay` | Fax |
+| `warumLabel` | Überschrift der Warum-wir-Sektion |
+| `warum1Titel` … `warum4Text` | 4 USP-Punkte |
 
 ---
 
 ## Schritt 3: Bilder austauschen
 
-Alle Bilder liegen in `website/images/`. Folgende Dateien ersetzen:
+Alle Bilder in `website/images/`. **Dateinamen sind fix** — Kundenbilder unter diesen Namen ablegen.
 
-| Dateiname | Verwendung | Empf. Dimension | Format |
-|-----------|-----------|-----------------|--------|
-| `logo-client.png` + `.webp` | Logo in Navigation | min. 800×170px, transparenter Hintergrund | PNG + WebP |
-| `favicon-client.png` | Browser-Tab-Icon | 512×512px quadratisch | PNG |
-| `hero-poster.jpg` + `.webp` | Hero-Hintergrund (Fallback) | 1920×1080px min. | JPG + WebP |
-| `video_hero_section_backround.mp4` | Hero-Video (optional) | 1920×1080px, max. 800KB | MP4 |
-| `team-bild.jpg` + `.webp` | Teamfoto (Über uns) | 4:3 Format, min. 1200×900px | JPG + WebP |
-| `bild-haus.jpg` + `.webp` | Betriebsbild (Warum wir) | 4:3 Format, min. 1200×900px | JPG + WebP |
-| `ref_1.jpg` bis `ref_10.jpg` + `.webp` | Referenzgalerie | 350×350px (quadratisch) | JPG + WebP |
-| `vorher_slide.png` + `.webp` | Vorher/Nachher Slider | 1024×571px (16:9) oder 768×1024px (3:4) | PNG + WebP |
-| `nachher_slide.png` + `.webp` | Vorher/Nachher Slider | gleiche Dimension wie vorher_slide | PNG + WebP |
-| `meisterbrief.jpg` + `.webp` | Urkunden/Zertifikate | Hochformat, min. 400×600px | JPG + WebP |
-| `meisterbrief2.jpg` + `.webp` | Urkunden/Zertifikate | Hochformat | JPG + WebP |
-| `urkunde.jpg` + `.webp` | Urkunden/Zertifikate | Hochformat | JPG + WebP |
+### Pflichtbilder
 
-**WebP konvertieren:**
+| Dateiname | Verwendung | Dimension | Format |
+|-----------|-----------|-----------|--------|
+| `logo-client.webp` + `.png` | Header + Hero | min. 800×170px, transparenter BG | WebP + PNG |
+| `logo-client-white.webp` | Logo im Hero (weiß/hell) | gleich wie oben | WebP |
+| `favicon-client.png` | Browser-Tab | 512×512px | PNG |
+| `hero-poster.webp` + `.jpg` | Hero-Video-Fallback | 1920×1080px | WebP + JPG |
+| `video_hero_section_background.mp4` | Hero-Background-Video | 1080p, max. 5MB | MP4 H.264 |
+| `og-image.jpg` | Social-Share-Vorschau | 1200×630px | JPG |
+
+### Weitere Bilder
+
+| Dateiname | Verwendung | Dimension | Format |
+|-----------|-----------|-----------|--------|
+| `team-bild.webp` + `.jpg` | Über-uns | 1200×900px (4:3) | WebP + JPG |
+| `bild-haus.webp` + `.jpg` | Warum-wir | 1200×900px (4:3) | WebP + JPG |
+| `ref_1.webp` … `ref_10.webp` | Referenz-Projekte | 800×600px | WebP |
+| `vorher_slide.webp` | Vorher/Nachher | 1024×571px | WebP |
+| `nachher_slide.webp` | Vorher/Nachher | gleich wie vorher | WebP |
+| `meisterbrief.webp` | Urkunden/Zertifikate | Hochformat, min. 400×600px | WebP |
+| `partner/[name].webp` | Partner-Karussell | 200×80px, transparenter BG | WebP |
+
+**WebP konvertieren (PowerShell, benötigt ffmpeg):**
 ```powershell
-# Im Projektordner: (benötigt ffmpeg)
 .\scripts\convert-images-webp.ps1
 ```
-
-**Logo-Dateiname:** Im Template heißen die Dateien fest `logo-client.*` und `favicon-client.png`. Kundenlogo unter diesen Namen in `website/images/` ablegen — **kein** Umbenennen in HTML nötig.
-
-**Weitere Pflichtfelder in config.js (neben Kontakt/SEO):**
-
-| Feld | Beschreibung |
-|------|-------------|
-| `leistungenKurz` | Kurzliste für Meta-Description |
-| `leistung1Titel` … `leistung4Text` | 4 Leistungskarten Startseite |
-| `warumLabel`, `warum1Titel` … `warum4Text` | Warum-wir-Sektion |
-| `referenzenIntro` | Einleitung auf referenzen.html |
-| `team1Name` … `team3Rolle` | Teamseite (optional leer lassen) |
-| `pdfSlug` | Dateiname für Kalkulations-PDF |
 
 ---
 
 ## Schritt 4: Texte in HTML eintragen
 
-Diese Inhalte sind **teilweise** in `config.js`, teilweise in HTML:
-
 | Inhalt | Wo |
 |--------|-----|
-| Leistungen (4 Karten), Warum-wir (4 Punkte), Team, Referenzen-Intro | `config.js` |
-| Über-uns (3 Absätze) | `index.html` → `[ÜBER_UNS_ABSATZ_1]` … |
-| Google-Bewertungen (5×) | `index.html` → `[BEWERTUNG_1_…]` |
+| Hero H1, Eyebrow, CTA | `config.js → heroH1, heroEyebrow, heroCta` |
+| Leistungen (4 Karten + Sub-Items) | `config.js → leistung1Titel` … |
+| Warum-wir (4 USPs) | `config.js → warum1Titel` … |
+| Trust-Kennzahlen | `config.js → jahreErfahrung, projekte` … |
+| Partner-Array | `config.js → partner[]` |
+| FAQ-Einträge | `config.js → faq[]` |
+| Über-uns (3 Absätze) | `index.html` → `[ÜBER_UNS_ABSATZ_1]` … `[ÜBER_UNS_ABSATZ_3]` |
+| Google-Bewertungen (5×) | `index.html` → `[BEWERTUNG_1_VORNAME]` … |
 | Leistungs-Unterseiten | `website/leistungen/*.html` |
 
-### 4a) Über-Uns Text
-Suche in `index.html` nach `[ÜBER_UNS_ABSATZ_1]` — ersetze die 3 Absätze mit dem Unternehmenstext des Kunden.
-
-### 4a2) Warum-wir & Leistungen
-Die meisten Texte laufen über `config.js` (`leistung1Titel`, `warum1Titel` usw.). Nur wenn die Struktur abweicht: direkt in `index.html` editieren.
+### 4a) Über-uns Text
+In `index.html` nach `[ÜBER_UNS_ABSATZ_1]` suchen — 3 Absätze mit Kundentext ersetzen.
 
 ### 4b) Google-Bewertungen (5 Stück)
-Suche nach `[BEWERTUNG_1_VORNAME_NACHNAME]` — ersetze alle 5 Bewertungen mit echten Google-Bewertungen:
+In `index.html` nach `[BEWERTUNG_1_VORNAME_NACHNAME]` suchen.
 - Name: Echten Namen aus Google verwenden
-- Text: Zitat unverändert (verbatim!) aus dem Google-Profil
-- Avatar-Initiale: Ersten Buchstaben des Vornamens
-- Link: `data-config-href="googleBewertung"` bleibt (wird automatisch gefüllt)
+- Text: Verbatim aus Google-Profil kopieren (keine Änderungen)
+- Avatar-Initiale: Erster Buchstabe Vorname
 
-### 4c) Leistungs-Unterseiten
-Texte unter `website/leistungen/*.html` anpassen (nicht in config.js).
+### 4c) FAQ-Einträge
+Mindestens 6 Einträge in `config.js → faq[]` — häufige echte Kundenfragen verwenden.
+
+### 4d) Termin & Formulare (Varianten)
+
+| Feld | Demo-Standard | Go-Live |
+|------|---------------|---------|
+| `terminVariante` | `"rueckruf"` (Tel + WA + mailto-Formular) | `"calcom"` oder `"formular"` |
+| `formularModus` | `"mailto"` | `"web3forms"` + echter `web3formsKey` |
+| `whatsapp` | `""` oder Festnetz-Mobil | Internationale Nummer `+49…` |
+
+Details: [`TEMPLATE-STRUKTUR.md`](TEMPLATE-STRUKTUR.md) §5–§8.
 
 ---
 
 ## Schritt 5: Web3Forms einrichten
 
-1. Gehe zu [web3forms.com](https://web3forms.com)
-2. "Create your Access Key" — E-Mail-Adresse eingeben (die des Kunden)
-3. Bestätigungs-Mail öffnen, Access Key kopieren
-4. In `config.js`: `web3formsKey: "DEIN_KEY_HIER"`
-5. Im Web3Forms Dashboard: Empfänger-E-Mail auf Kunden-Mail setzen
+1. [web3forms.com](https://web3forms.com) → "Create your Access Key" mit Kunden-E-Mail
+2. Bestätigungs-Mail öffnen, Access Key kopieren
+3. In `config.js`: `web3formsKey: "KEY_HIER"`
+4. Im Dashboard: Empfänger-E-Mail auf Kunden-Mail setzen
 
 ---
 
 ## Schritt 6: Cal.com einrichten
 
-1. Gehe zu [cal.com](https://cal.com) — kostenlosen Account anlegen
-2. Event-Typ anlegen: "Kostenloses Beratungsgespräch" (30–60 min)
-3. Buchungs-URL kopieren (z.B. `https://cal.com/meinbetrieb/beratung`)
+1. [cal.com](https://cal.com) → Account anlegen (Name des Kunden)
+2. Event: "Kostenloses Beratungsgespräch" (30–60 min)
+3. Buchungs-URL kopieren
 4. In `config.js`: `calcomLink: "https://cal.com/..."`
 
 ---
 
-## Schritt 7: Google Maps Embed-URL holen
+## Schritt 7: Google Maps Embed-URL
 
-1. Gehe zu [maps.google.com](https://maps.google.com)
-2. Adresse des Kunden suchen
-3. "Teilen" → "Karte einbetten" → HTML-Code kopieren
-4. Aus dem `<iframe src="...">` nur die URL extrahieren
-5. In `config.js`: `googleMapsEmbedUrl: "https://www.google.com/maps/embed?..."`
+1. [maps.google.com](https://maps.google.com) → Adresse suchen
+2. "Teilen" → "Karte einbetten" → `<iframe src="...">` URL extrahieren
+3. In `config.js`: `googleMapsEmbedUrl: "..."`
 
 ---
 
 ## Schritt 8: Farben anpassen
 
-Öffne `website/css/variables.css` und passe an:
-
 ```css
---primary:       #1a2b4c;   /* Hauptfarbe aus Kundenlogo */
---accent:        #2980b9;   /* CTA-Akzentfarbe — oft aus Logo */
---accent-hover:  #2471a3;   /* ~10% dunkler als accent */
---accent-light:  #d6eaf8;   /* sehr helle Version von accent */
+/* website/css/variables.css */
+--primary:       #1a2b4c;   /* [PRIMÄRFARBE] aus Kundenlogo */
+--accent:        #c9a84c;   /* [AKZENTFARBE] — CTA-Buttons, Highlights */
+--accent-hover:  #a8893c;   /* ~10% dunkler als --accent */
+--accent-light:  #f5efe0;   /* sehr helle Version von --accent */
 ```
 
 Tipp: [coolors.co](https://coolors.co) → Logo-Farbe eingeben → Palette generieren.
 
+**Partner-Sektionshintergrund:** `config.js → partnerBgColor` setzen (z.B. `"var(--primary)"` oder direkter Hex-Wert).
+
 ---
 
-## Schritt 9: Vercel Deployment
+## Schritt 9: WhatsApp-Button konfigurieren
 
-> **Wichtig:** Alle Deploy-Fehler aus früheren Projekten sind hier bereits berücksichtigt.
+```js
+// config.js
+telefon: "+4926128744414",  // ohne Leerzeichen, mit Ländervorwahl
+whatsappText: "Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20Angebot.",
+```
 
-### 9a) Repo auf GitHub pushen
+Der floating WhatsApp-Button baut die URL automatisch:
+`https://wa.me/[telefon]?text=[whatsappText]`
+
+---
+
+## Schritt 10: Vercel Deployment
+
+> Alle bekannten Deploy-Fehler sind hier bereits berücksichtigt.
+
+### 10a) Repo auf GitHub pushen
 ```bash
 git init
 git add .
-git commit -m "init: Handwerker Template für [KUNDE]"
-git remote add origin https://github.com/DEIN_ORG/REPO.git
+git commit -m "init: [KUNDENNAME] Website"
+git remote add origin https://github.com/ritzaisolutions-dotcom/REPO.git
 git push -u origin main
 ```
 
-### 9b) Vercel Projekt anlegen
+### 10b) Vercel Projekt anlegen
 1. Vercel Dashboard → "Add New Project" → GitHub Repo importieren
-2. **Root Directory:** `website` eintippen (genau so, kleingeschrieben)
-3. **Build Command:** **LEER LASSEN** (kein Framework = kein Build nötig)
-4. **Output Directory:** **LEER LASSEN**
+2. **Root Directory:** `website` (kleingeschrieben, exakt so)
+3. **Build Command:** LEER LASSEN
+4. **Output Directory:** LEER LASSEN
 5. Framework Preset: **Other**
-6. "Deploy" klicken
+6. Deploy
 
-### 9c) Deployment prüfen
-```bash
-# 1. Preview-URL im Browser öffnen
-# 2. Im Netzwerk-Tab prüfen: /css/style.css → 200
-# 3. Im HTML prüfen: id="kostenrechner" vorhanden
-# 4. Kein "TODO" oder "[PLACEHOLDER]" sichtbar
-```
-
-### 9d) Custom Domain setzen
-Vercel Dashboard → Project → Settings → Domains → Domain hinzufügen.
-DNS-Einträge beim Hoster laut Vercel-Anweisung setzen.
+### 10c) Custom Domain
+Vercel → Project → Settings → Domains → Domain hinzufügen → DNS beim Hoster setzen.
 
 ---
 
-## Schritt 10: Rechtliches freigeben
+## Schritt 11: Rechtliches freigeben
 
-- [ ] Impressum: Alle Daten vollständig (USt-IdNr, Kammer, Fachverband)
-- [ ] Datenschutz: Auf Vollständigkeit prüfen (evtl. Datenschutz-Generator nutzen)
-- [ ] Cookie-Banner: Klaro-Texte auf korrekten Firmennamen prüfen
-- [ ] Impressum und Datenschutz von jeder Seite erreichbar (Footer-Links)
+- [ ] Impressum: Alle Felder vollständig (USt-IdNr, Kammer, Fachverband)
+- [ ] Datenschutz: Auf Vollständigkeit prüfen
+- [ ] Klaro Cookie-Banner: Firmenname korrekt
+- [ ] Impressum + Datenschutz von jeder Seite erreichbar (Footer)
+- [ ] **Cookiebot Alternative:** Falls Klaro nicht gewünscht → Cookiebot via `<script data-blockingmode="auto">` — `data-blockingmode="auto"` ist Pflicht
 
 ---
 
 ## Go-Live Checkliste
 
-### Gate A — Inputs
-- [ ] Alle `[PLACEHOLDER]` in config.js ausgefüllt
-- [ ] Alle Pflichtbilder ausgetauscht und in `website/images/`
+### Gate A — Inputs & Leak-Check
+- [ ] Alle `[PLACEHOLDER]` in `config.js` ausgefüllt
+- [ ] Kein Vorlagen-Leak: `rg -i "butz|römerberg|fliesenmeister-butz" website --glob "*.{html,js,css,xml}"` → 0 Treffer
+- [ ] Kein offener Placeholder: `rg "\[PLACEHOLDER\]|\[ÜBER_UNS\]|\[BEWERTUNG_" website` → 0 Treffer
+- [ ] Alle Pflichtbilder ausgetauscht (hero-poster, logo, og-image)
+- [ ] Partner-Array ausgefüllt (alle 12 falls vorhanden)
+- [ ] FAQ-Array ausgefüllt (min. 6 Einträge)
 - [ ] Bewertungen eingetragen (5×)
-- [ ] Über-Uns-Text eingetragen
+- [ ] Über-Uns-Text eingetragen (3 Absätze)
 
 ### Gate B — Legal
-- [ ] Impressum vollständig und rechtlich geprüft
-- [ ] Datenschutz vollständig
-- [ ] Cookie-Banner funktioniert (Ablehnen gleichwertig zu Akzeptieren)
+- [ ] Impressum vollständig (§5 TMG)
+- [ ] Datenschutz vollständig (DSGVO)
+- [ ] Cookie-Banner: Ablehnen gleichwertig zu Akzeptieren
+- [ ] Google Maps Embed nur nach Consent
 
-### Gate C — No Errors
+### Gate C — Keine Fehler
 - [ ] Browser-Konsole: keine JS-Fehler
-- [ ] Netzwerk-Tab: keine 404-Fehler auf Assets
-- [ ] Kostenrechner komplett durchklickbar
-- [ ] Kontaktformular erfolgreich absenden (Test mit echten Daten)
+- [ ] Netzwerk-Tab: keine 404er auf Assets
+- [ ] Kostenrechner vollständig durchklickbar
+- [ ] Kontaktformular: Test-Submission erfolgreich
+- [ ] WhatsApp-Link öffnet mit vorbefülltem Text
+- [ ] Tel-Link funktioniert auf Mobile
 
 ### Gate D — SEO
-- [ ] `<title>` korrekt auf allen Seiten
-- [ ] `<meta description>` sinnvoll
-- [ ] Schema.org im DOM korrekt (Browser-Inspektor → script[type="application/ld+json"])
-- [ ] `og:image` gesetzt (website/images/og-image.jpg vorhanden)
-- [ ] sitemap.xml aktualisiert (domain + URLs)
+- [ ] `<title>` korrekt (50–60 Zeichen, Keyword + Stadt)
+- [ ] `<meta description>` korrekt (150–160 Zeichen)
+- [ ] Schema.org korrekt (Inspektor → `script[type="application/ld+json"]`)
+- [ ] `og:image` gesetzt und Datei vorhanden
+- [ ] `sitemap.xml` aktualisiert
+- [ ] Genau 1× `<h1>` auf Startseite
+- [ ] Alle `<img>` haben `alt`, `width`, `height`
 
-### Gate E — HTTPS + Mobile
-- [ ] HTTPS aktiv (Vercel macht das automatisch)
-- [ ] CTA-Buttons auf Mobile tappbar (44×44px)
-- [ ] Kontaktformular auf 375px bedienbar
-- [ ] Hero-Video / Poster lädt auf Mobile
-- [ ] Impressum + Datenschutz Links im Footer sichtbar
+### Gate E — Mobile & Performance
+- [ ] HTTPS aktiv
+- [ ] Kein horizontaler Scroll auf 375px
+- [ ] Alle Tap-Targets ≥ 44×44px
+- [ ] Floating Buttons (WhatsApp + Tel) nicht überlappend mit Footer
+- [ ] Hero-Video lädt auf Mobile (oder Fallback-Poster sichtbar)
+- [ ] Kontaktformular + FAQ auf Mobile gestackt (nicht nebeneinander)
+- [ ] Partner-Karussell auf Mobile lesbar
 
 ---
 
 ## Hilfe & Referenzen
 
-- Web3Forms Docs: https://docs.web3forms.com
-- Cal.com Docs: https://cal.com/docs
-- Vercel Docs: https://vercel.com/docs
-- Klaro Docs: https://heyklaro.com/docs
-- SOP-Playbook: `sop-webseiten-bau/` (vollständige Entwicklungs-SOP)
+- Web3Forms: https://docs.web3forms.com
+- Cal.com: https://cal.com/docs
+- Vercel: https://vercel.com/docs
+- Klaro: https://heyklaro.com/docs
+- Cookiebot: https://www.cookiebot.com/de/
+- SOP-Playbook: `sop-webseiten-bau/`

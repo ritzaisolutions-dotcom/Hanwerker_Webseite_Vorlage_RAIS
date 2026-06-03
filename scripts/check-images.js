@@ -10,6 +10,8 @@ function collectRefs(filePath) {
   for (const m of content.matchAll(/(?:src|href|srcset|poster)=["']([^"']+)["']/gi)) {
     let ref = m[1].split(',')[0].trim();
     if (ref.startsWith('http') || ref.startsWith('#') || ref.startsWith('mailto:') || ref.startsWith('tel:')) continue;
+    ref = ref.split('#')[0];
+    if (!ref) continue;
     if (!ref.includes('.')) continue;
     const resolved = path.normalize(path.join(ROOT, dir, ref)).replace(/\\/g, '/');
     const rel = path.relative(ROOT, resolved).replace(/\\/g, '/');
@@ -39,7 +41,9 @@ function walk(dir, acc = []) {
         const url = `${BASE}/${rel.split('/').map(encodeURIComponent).join('/').replace(/%2F/g, '/')}`;
         const enc = rel.split('/').map(encodeURIComponent).join('/');
         const res = await fetch(`${BASE}/${enc}`);
-        if (!res.ok) httpFail.push({ from, rel, status: res.status });
+        if (!res.ok && !(rel === '404.html' && res.status === 404)) {
+          httpFail.push({ from, rel, status: res.status });
+        }
       }
     }
   }

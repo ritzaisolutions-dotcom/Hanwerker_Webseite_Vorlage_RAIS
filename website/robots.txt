@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
-# Controlled launch: keep non-public helper paths out of index.
-Disallow: /docs/
-Disallow: /assets/private/
-Sitemap: https://www.fliesen-butz.de/sitemap.xml
+
+# LLM / Automation (nach Go-Live Domain anpassen)
+# https://www.[DOMAIN].de/llms.txt
+# https://www.[DOMAIN].de/business-profile.json
+
+Sitemap: https://www.[DOMAIN].de/sitemap.xml

@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Datenschutz | [FIRMENNAME] [UNTERNEHMENSTYP]</title>
+  <title>Datenschutz | [FIRMENNAME]</title>
   <meta name="robots" content="noindex, follow">
   <link rel="icon" type="image/png" href="images/favicon-client.png">
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/config.js"></script>
@@ -16,20 +15,58 @@
 <body>
   <nav class="nav nav--scrolled" id="mainNav" aria-label="Hauptnavigation">
     <div class="nav__inner">
-      <a href="index.html#hero" class="nav__wordmark" aria-label="Startseite">
-        <picture>
-          <source srcset="images/logo-client.webp" type="image/webp">
-          <img class="nav__logo" src="images/logo-client.png" alt="[FIRMENNAME]" data-config-alt="true" width="200" height="42" decoding="async">
-        </picture>
+      <a href="index.html#hero" class="nav__wordmark" aria-label="[FIRMENNAME], Startseite">
+        <img class="nav__logo" src="images/logo-client.svg" alt="" width="48" height="48" decoding="async" aria-hidden="true">
+        <span class="nav__wordmark-text">
+          <span class="nav__wordmark-name" data-config="nameKurz">[NAMEKURZ]</span>
+          <span class="nav__wordmark-sub">Malerei · [ORT]</span>
+        </span>
       </a>
+
       <ul class="nav__links" role="list">
-        <li><a href="index.html#leistungen">Leistungen</a></li>
+        <li class="nav__item nav__item--dropdown">
+          <button type="button" class="nav__dropdown-btn" id="navLeistungenBtn" aria-expanded="false" aria-controls="navLeistungenMenu" aria-haspopup="true">Leistungen</button>
+          <ul class="nav__dropdown" id="navLeistungenMenu" role="menu" hidden>
+            <li role="none"><a role="menuitem" href="leistungen/innenarbeiten.html">Innenarbeiten</a></li>
+            <li role="none"><a role="menuitem" href="leistungen/fassade.html">Fassade &amp; Außenarbeiten</a></li>
+            <li role="none"><a role="menuitem" href="leistungen/bodenbelaege.html">Bodenbeläge</a></li>
+            <li role="none"><a role="menuitem" href="leistungen/schimmelbeseitigung.html">Schimmelbeseitigung</a></li>
+            <li role="none" class="nav__dropdown-divider"><a role="menuitem" href="index.html#leistungen">Übersicht Startseite</a></li>
+          </ul>
+        </li>
+        <li data-nav-calc><a href="index.html#kostenrechner">Kostenrechner</a></li>
         <li><a href="referenzen.html">Referenzen</a></li>
+        <li><a href="team.html">Team</a></li>
         <li><a href="index.html#kontakt">Kontakt</a></li>
-        <li><a href="impressum.html">Impressum</a></li>
       </ul>
+
+      <a href="index.html#termin" class="btn btn--primary btn--sm nav__cta">Termin buchen</a>
+
+      <button class="nav__hamburger" id="navHamburger" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div class="nav__mobile" id="navMobile" role="dialog" aria-label="Navigation">
+    <button class="nav__mobile-close" id="navMobileClose" aria-label="Menü schließen">✕</button>
+    <details class="nav__mobile-group">
+      <summary>Leistungen</summary>
+      <a href="leistungen/innenarbeiten.html">Innenarbeiten</a>
+      <a href="leistungen/fassade.html">Fassade &amp; Außenarbeiten</a>
+      <a href="leistungen/bodenbelaege.html">Bodenbeläge</a>
+      <a href="leistungen/schimmelbeseitigung.html">Schimmelbeseitigung</a>
+      <a href="index.html#leistungen">Übersicht Startseite</a>
+    </details>
+    <a href="index.html#kostenrechner" data-nav-calc>Kostenrechner</a>
+    <a href="referenzen.html">Referenzen</a>
+    <a href="team.html">Team</a>
+    <a href="index.html#kontakt">Kontakt</a>
+    <a href="index.html#termin" class="btn btn--primary" style="margin-top:1rem">Termin buchen</a>
+    <span class="nav__mobile-phone">
+      <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON_DISPLAY]</a>
+    </span>
+  </div>
 
   <main class="subpage-main container">
     <header class="subpage-hero">
@@ -49,8 +86,8 @@
         Deutschland
       </p>
       <p>
-        E-Mail: <a href="mailto:#" data-config-href="mailto" data-config="email">[EMAIL]</a><br>
-        Telefon: <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON]</a>
+        E-Mail: <a href="mailto:#" data-config-href="mailto" data-config="email">info@www.[DOMAIN].de</a><br>
+        Telefon: <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON_DISPLAY]</a>
       </p>
     </section>
 
@@ -77,6 +114,10 @@
         <li data-datenschutz-termin="formular" hidden>
           Terminanfragen über das Terminformular auf dieser Website – Übermittlung über <strong>Web3Forms</strong> mit clientseitiger Validierung und Honeypot-Feld zur zweckgebundenen Bearbeitung.
         </li>
+        <!-- Termin-Variante: rueckruf — Rückruf per Telefon, WhatsApp oder mailto -->
+        <li data-datenschutz-termin="rueckruf" hidden>
+          Rückrufanfragen über Telefon, <strong>WhatsApp</strong> (Meta Platforms Ireland Limited) oder ein Formular, das Ihr lokales E-Mail-Programm öffnet (<code>mailto</code>). Beim WhatsApp-Link können technische Verbindungsdaten an Meta übermittelt werden.
+        </li>
 
         <li>Einbindung von Kartenmaterial (<strong>Google Maps</strong>) als externe Ressource – nur nach aktiver Einwilligung.</li>
       </ul>
@@ -89,7 +130,7 @@
       <h2>Rechtsgrundlagen</h2>
       <ul class="subpage-list">
         <li>Art. 6 Abs. 1 lit. f DSGVO für technisch notwendige Bereitstellung der Website und Consent-Speicherung (berechtigtes Interesse).</li>
-        <li>Art. 6 Abs. 1 lit. a DSGVO für einwilligungsbasierte Dienste (Cal.com Terminbuchungs-Embed, Google Maps).</li>
+        <li>Art. 6 Abs. 1 lit. a DSGVO für einwilligungsbasierte Dienste (je nach aktivierter Variante: Cal.com Terminbuchungs-Embed, WhatsApp-Link oder Google Maps).</li>
         <li>Art. 6 Abs. 1 lit. b DSGVO für vorvertragliche Kommunikation bei Kontaktanfragen, Kostenrechner-Rückrufen und Terminanfragen.</li>
       </ul>
     </section>
@@ -110,6 +151,9 @@
         </li>
         <li data-datenschutz-termin="formular" hidden>
           Terminanfragen über das Formular werden an <strong>Web3Forms</strong> als technischen Dienstleister übermittelt.
+        </li>
+        <li data-datenschutz-termin="rueckruf" hidden>
+          Rückrufanfragen über das Formular werden über Ihr E-Mail-Programm (<code>mailto</code>) an uns übermittelt; bei WhatsApp erfolgt die Verarbeitung über <strong>Meta Platforms Ireland Limited</strong>.
         </li>
 
         <li>Google Maps wird erst nach Einwilligung geladen und kann technische Verbindungsdaten (z. B. IP-Adresse) an <strong>Google Ireland Limited</strong> übermitteln.</li>
@@ -144,7 +188,7 @@
         <li>Widerspruch gegen Verarbeitungen nach Art. 6 Abs. 1 lit. f DSGVO (Art. 21 DSGVO)</li>
         <li>Widerruf erteilter Einwilligungen mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)</li>
       </ul>
-      <p>Zur Ausübung Ihrer Rechte genügt eine formlose Nachricht an <a href="mailto:#" data-config-href="mailto" data-config="email">[EMAIL]</a>.</p>
+      <p>Zur Ausübung Ihrer Rechte genügt eine formlose Nachricht an <a href="mailto:#" data-config-href="mailto" data-config="email">info@www.[DOMAIN].de</a>.</p>
     </section>
 
     <!-- ══════════════════════════════════════════════════════════
@@ -179,6 +223,7 @@
         <li><a class="inline-link" href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer">Web3Forms Privacy Policy</a></li>
         <li data-datenschutz-termin="calcom"><a class="inline-link" href="https://cal.com/privacy" target="_blank" rel="noopener noreferrer">Cal.com Privacy Policy</a></li>
         <li data-datenschutz-termin="whatsapp" hidden><a class="inline-link" href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">WhatsApp / Meta Privacy Policy</a></li>
+        <li data-datenschutz-termin="rueckruf" hidden><a class="inline-link" href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">WhatsApp / Meta Privacy Policy</a></li>
         <li><a class="inline-link" href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a></li>
       </ul>
     </section>
@@ -187,7 +232,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__bottom">
-        <span class="footer__copy" data-config="copyright">© [JAHR] [FIRMENNAME], [ORT]</span>
+        <span class="footer__copy" data-config="copyright">© 2026 [FIRMENNAME], [ORT]</span>
         <div class="footer__socials" style="display:flex;gap:.8rem;">
           <a href="#" data-config-href="facebook" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">Facebook</a>
           <a href="#" data-config-href="instagram" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">Instagram</a>

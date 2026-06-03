@@ -5,10 +5,12 @@ const pages = [
   '/impressum.html',
   '/datenschutz.html',
   '/404.html',
-  '/leistungen/badsanierung.html',
-  '/leistungen/fliesenverlegung.html',
-  '/leistungen/terrassen.html',
-  '/leistungen/reparatur.html'
+  '/leistungen/innenarbeiten.html',
+  '/leistungen/fassade.html',
+  '/leistungen/bodenbelaege.html',
+  '/leistungen/schimmelbeseitigung.html',
+  '/llms.txt',
+  '/business-profile.json'
 ];
 
 const baseUrl = process.env.BASE_URL || 'http://127.0.0.1:4173';
@@ -42,6 +44,8 @@ async function checkIndexIntegrity() {
   }
 
   const requiredStrings = [
+    'id="faq"',
+    'id="schema-graph"',
     'id="kostenrechner"',
     'id="calcForm"',
     'id="calcPdfBtn"',

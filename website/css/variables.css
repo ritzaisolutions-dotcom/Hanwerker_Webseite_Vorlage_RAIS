@@ -4,23 +4,23 @@
      Werden von config-apply.js via CLIENT.colors überschrieben.
      Diese Werte sind Fallbacks / Vorschau-Defaults.
   ══════════════════════════════════════════════════════════════ */
-  --primary:       #1a2b4c;   /* Primärfarbe   — aus Kundenlogo wählen         */
-  --primary-dark:  #0d1526;   /* Primär dunkel — Hero-Overlay, Footer          */
-  --primary-mid:   #243a61;   /* Primär mittel — etwas heller als primary      */
-  --primary-light: #3d5580;   /* Primär hell   — Hover-States, Akzente         */
-  --accent:        #2980b9;   /* Akzentfarbe   — CTA-Buttons, aus Logo ableiten */
-  --accent-hover:  #2471a3;   /* Akzent Hover  — ~10 % dunkler als --accent    */
-  --accent-light:  #d6eaf8;   /* Akzent hell   — Badge-Hintergrund             */
+  --primary:       #c9a84c;   /* Goldakzent für Headlines, Borders und CTAs    */
+  --primary-dark:  #0f0e0c;   /* Fast-Schwarz mit warmem Unterton              */
+  --primary-mid:   #1c1a14;   /* Karten und dunkle Sektionen                   */
+  --primary-light: #242018;   /* Erhöhte Flächen                               */
+  --accent:        #c9a84c;   /* Gold Primary                                  */
+  --accent-hover:  #e8c97a;   /* Gold Light                                    */
+  --accent-light:  #8a7035;   /* Gold Muted                                    */
 
   /* ══════════════════════════════════════════════════════════════
      UI NEUTRAL COLORS
   ══════════════════════════════════════════════════════════════ */
-  --bg:         #ffffff;
-  --bg-alt:     #f7f8fa;
-  --text:       #333333;
-  --text-light: #666666;
-  --text-muted: #999999;
-  --border:     #e4e8ef;
+  --bg:         #0f0e0c;
+  --bg-alt:     #1c1a14;
+  --text:       #f5efe0;
+  --text-light: #b5a98a;
+  --text-muted: #4a4640;
+  --border:     #4a4640;
 
   /* ══════════════════════════════════════════════════════════════
      THIRD-PARTY COLORS  (nicht über config.js veränderbar)
@@ -53,9 +53,9 @@
   /* ══════════════════════════════════════════════════════════════
      SHADOWS
   ══════════════════════════════════════════════════════════════ */
-  --s-sm: 0 1px 4px rgba(26,43,76,.08);
-  --s-md: 0 4px 20px rgba(26,43,76,.12);
-  --s-lg: 0 8px 40px rgba(26,43,76,.18);
+  --s-sm: 0 1px 4px rgba(0,0,0,.18);
+  --s-md: 0 4px 20px rgba(0,0,0,.28);
+  --s-lg: 0 8px 40px rgba(0,0,0,.38);
 
   /* ══════════════════════════════════════════════════════════════
      ANIMATION
@@ -70,7 +70,7 @@
      Self-hosted Fonts in assets/fonts/ — keine Google-Font-Requests
   ══════════════════════════════════════════════════════════════ */
   --ff-head: 'CormorantGaramondLocal', 'Cormorant Garamond', Georgia, serif;
-  --ff-body: 'DMSansLocal', 'DM Sans', Arial, sans-serif;
+  --ff-body: 'JostLocal', 'Jost', Arial, sans-serif;
 
   --fs-xs:   clamp(0.72rem, 1.2vw, 0.8rem);
   --fs-sm:   clamp(0.85rem, 1.5vw, 0.9rem);
@@ -89,5 +89,5 @@
 
   --section-p-y: var(--sp-8);
   --section-gap: var(--sp-6);
-  --hero-min-h: 115vh;
+  --hero-min-h: 100svh;
 }

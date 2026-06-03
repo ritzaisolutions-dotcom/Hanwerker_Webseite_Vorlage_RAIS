@@ -1,0 +1,52 @@
+/**
+ * One-off: download partner favicons into website/images/partner/
+ * Usage: node scripts/fetch-partner-logos.js
+ */
+const fs = require('fs');
+const path = require('path');
+const https = require('https');
+
+const OUT = path.join(__dirname, '..', 'website', 'images', 'partner');
+
+// Domains anpassen — muss zu CLIENT.partner[] in config.js passen
+const partners = [
+  { file: 'partner-1.png', domain: 'example-partner-1.de' },
+  { file: 'partner-2.png', domain: 'example-partner-2.de' },
+  { file: 'partner-3.png', domain: 'example-partner-3.de' }
+];
+
+function fetchUrl(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        fetchUrl(res.headers.location).then(resolve).catch(reject);
+        return;
+      }
+      if (res.statusCode !== 200) {
+        reject(new Error(`${url} -> ${res.statusCode}`));
+        res.resume();
+        return;
+      }
+      const chunks = [];
+      res.on('data', (c) => chunks.push(c));
+      res.on('end', () => resolve(Buffer.concat(chunks)));
+    }).on('error', reject);
+  });
+}
+
+async function main() {
+  fs.mkdirSync(OUT, { recursive: true });
+  for (const { file, domain } of partners) {
+    const url = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+    const dest = path.join(OUT, file);
+    try {
+      const buf = await fetchUrl(url);
+      fs.writeFileSync(dest, buf);
+      console.log('OK', file, buf.length, 'bytes');
+    } catch (e) {
+      console.error('FAIL', file, e.message);
+    }
+  }
+}
+
+main();

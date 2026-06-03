@@ -9,20 +9,23 @@ INDEX.HTML (One-Pager mit Anker)
 ├─ #hero
 ├─ #vorher-nachher
 ├─ #leistungen
+├─ #kostenrechner (optional)
 ├─ #warum
 ├─ #familie
 ├─ #referenzen
+├─ #partner
 ├─ #bewertungen
 ├─ #termin
-└─ #kontakt
+└─ #kontakt (enthält #faq im Grid)
 
 UNTERSEITEN
-├─ /referenzen.html              ← Galerie
-├─ /kostenrechner.html           ← Tool
+├─ /referenzen.html
+├─ /team.html
 ├─ /leistungen/
-│   ├─ /[leistung-1].html
-│   ├─ /[leistung-2].html
-│   └─ /[leistung-3].html
+│   ├─ innenarbeiten.html
+│   ├─ fassade.html
+│   ├─ bodenbelaege.html
+│   └─ schimmelbeseitigung.html
 ├─ /impressum.html
 ├─ /datenschutz.html
 └─ /404.html

@@ -1,0 +1,69 @@
+{
+  "@context": "https://schema.org",
+  "type": "PublicBusinessProfile",
+  "version": "1.0",
+  "generatedFor": "llm-crawlers-and-automation",
+  "business": {
+    "legalName": "[FIRMENNAME]",
+    "tradeNames": ["[FIRMENNAME]", "[NAMEKURZ] [HANDWERKSBEZEICHNUNG] [ORT]"],
+    "handwerksbezeichnung": "[HANDWERKSBEZEICHNUNG]",
+    "berufsbezeichnung": "[BERUFSBEZEICHNUNG]",
+    "url": "https://www.[DOMAIN].de",
+    "email": "[EMAIL@DOMAIN.DE]",
+    "telephone": "+49[VORWAHL][NUMMER]",
+    "telephoneDisplay": "[TELEFON_DISPLAY]",
+    "address": {
+      "streetAddress": "[STRASSE_NR]",
+      "postalCode": "[PLZ]",
+      "addressLocality": "[ORT]",
+      "addressRegion": "[BUNDESLAND]",
+      "addressCountry": "DE"
+    },
+    "geo": {
+      "latitude": 0,
+      "longitude": 0
+    },
+    "hasMap": "[GOOGLE_MAPS_LINK]"
+  },
+  "openingHours": {
+    "mondayToThursday": [
+      { "opens": "08:00", "closes": "12:00" },
+      { "opens": "13:00", "closes": "17:00" }
+    ],
+    "friday": [
+      { "opens": "08:00", "closes": "12:00" },
+      { "opens": "13:00", "closes": "15:00" }
+    ],
+    "saturdaySunday": "closed"
+  },
+  "services": [
+    {
+      "id": "innenarbeiten",
+      "name": "[LEISTUNG_1_TITEL]",
+      "summary": "[LEISTUNG_1_TEXT]",
+      "url": "https://www.[DOMAIN].de/leistungen/innenarbeiten.html"
+    },
+    {
+      "id": "fassade",
+      "name": "[LEISTUNG_2_TITEL]",
+      "summary": "[LEISTUNG_2_TEXT]",
+      "url": "https://www.[DOMAIN].de/leistungen/fassade.html"
+    },
+    {
+      "id": "bodenbelaege",
+      "name": "[LEISTUNG_3_TITEL]",
+      "summary": "[LEISTUNG_3_TEXT]",
+      "url": "https://www.[DOMAIN].de/leistungen/bodenbelaege.html"
+    },
+    {
+      "id": "schimmelbeseitigung",
+      "name": "[LEISTUNG_4_TITEL]",
+      "summary": "[LEISTUNG_4_TEXT]",
+      "url": "https://www.[DOMAIN].de/leistungen/schimmelbeseitigung.html"
+    }
+  ],
+  "contact": {
+    "appointment": "https://www.[DOMAIN].de/#termin",
+    "form": "https://www.[DOMAIN].de/#kontakt"
+  }
+}

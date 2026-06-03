@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Impressum | [FIRMENNAME] [UNTERNEHMENSTYP]</title>
+  <title>Impressum | [FIRMENNAME]</title>
   <meta name="robots" content="index, follow">
   <link rel="icon" type="image/png" href="images/favicon-client.png">
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/config.js"></script>
@@ -16,20 +15,58 @@
 <body>
   <nav class="nav nav--scrolled" id="mainNav" aria-label="Hauptnavigation">
     <div class="nav__inner">
-      <a href="index.html#hero" class="nav__wordmark" aria-label="Startseite">
-        <picture>
-          <source srcset="images/logo-client.webp" type="image/webp">
-          <img class="nav__logo" src="images/logo-client.png" alt="[FIRMENNAME]" data-config-alt="true" width="200" height="42" decoding="async">
-        </picture>
+      <a href="index.html#hero" class="nav__wordmark" aria-label="[FIRMENNAME], Startseite">
+        <img class="nav__logo" src="images/logo-client.svg" alt="" width="48" height="48" decoding="async" aria-hidden="true">
+        <span class="nav__wordmark-text">
+          <span class="nav__wordmark-name" data-config="nameKurz">[NAMEKURZ]</span>
+          <span class="nav__wordmark-sub">Malerei · [ORT]</span>
+        </span>
       </a>
+
       <ul class="nav__links" role="list">
-        <li><a href="index.html#leistungen">Leistungen</a></li>
+        <li class="nav__item nav__item--dropdown">
+          <button type="button" class="nav__dropdown-btn" id="navLeistungenBtn" aria-expanded="false" aria-controls="navLeistungenMenu" aria-haspopup="true">Leistungen</button>
+          <ul class="nav__dropdown" id="navLeistungenMenu" role="menu" hidden>
+            <li role="none"><a role="menuitem" href="leistungen/innenarbeiten.html">Innenarbeiten</a></li>
+            <li role="none"><a role="menuitem" href="leistungen/fassade.html">Fassade &amp; Außenarbeiten</a></li>
+            <li role="none"><a role="menuitem" href="leistungen/bodenbelaege.html">Bodenbeläge</a></li>
+            <li role="none"><a role="menuitem" href="leistungen/schimmelbeseitigung.html">Schimmelbeseitigung</a></li>
+            <li role="none" class="nav__dropdown-divider"><a role="menuitem" href="index.html#leistungen">Übersicht Startseite</a></li>
+          </ul>
+        </li>
+        <li data-nav-calc><a href="index.html#kostenrechner">Kostenrechner</a></li>
         <li><a href="referenzen.html">Referenzen</a></li>
+        <li><a href="team.html">Team</a></li>
         <li><a href="index.html#kontakt">Kontakt</a></li>
-        <li><a href="datenschutz.html">Datenschutz</a></li>
       </ul>
+
+      <a href="index.html#termin" class="btn btn--primary btn--sm nav__cta">Termin buchen</a>
+
+      <button class="nav__hamburger" id="navHamburger" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <div class="nav__mobile" id="navMobile" role="dialog" aria-label="Navigation">
+    <button class="nav__mobile-close" id="navMobileClose" aria-label="Menü schließen">✕</button>
+    <details class="nav__mobile-group">
+      <summary>Leistungen</summary>
+      <a href="leistungen/innenarbeiten.html">Innenarbeiten</a>
+      <a href="leistungen/fassade.html">Fassade &amp; Außenarbeiten</a>
+      <a href="leistungen/bodenbelaege.html">Bodenbeläge</a>
+      <a href="leistungen/schimmelbeseitigung.html">Schimmelbeseitigung</a>
+      <a href="index.html#leistungen">Übersicht Startseite</a>
+    </details>
+    <a href="index.html#kostenrechner" data-nav-calc>Kostenrechner</a>
+    <a href="referenzen.html">Referenzen</a>
+    <a href="team.html">Team</a>
+    <a href="index.html#kontakt">Kontakt</a>
+    <a href="index.html#termin" class="btn btn--primary" style="margin-top:1rem">Termin buchen</a>
+    <span class="nav__mobile-phone">
+      <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON_DISPLAY]</a>
+    </span>
+  </div>
 
   <main class="subpage-main container">
     <header class="subpage-hero">
@@ -46,9 +83,9 @@
         Deutschland
       </p>
       <p>
-        Telefon: <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON]</a><br>
-        Fax: <span data-config="faxDisplay">[FAX]</span><br>
-        E-Mail: <a href="mailto:#" data-config-href="mailto" data-config="email">[EMAIL]</a>
+        Telefon: <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON_DISPLAY]</a><br>
+        Fax: <span data-config="faxDisplay">[FAX_DISPLAY]</span><br>
+        E-Mail: <a href="mailto:#" data-config-href="mailto" data-config="email">info@www.[DOMAIN].de</a>
       </p>
     </section>
 
@@ -64,7 +101,7 @@
 
     <section class="subpage-card">
       <h2>EU-Streitschlichtung</h2>
-      <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a class="inline-link" href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">ec.europa.eu/consumers/odr/</a>.</p>
+      <p>Die Europäische Plattform zur Online-Streitbeilegung ist seit dem 20. Juli 2025 eingestellt. Informationen der EU-Kommission finden Sie unter <a class="inline-link" href="https://consumer-redress.ec.europa.eu/index_de" target="_blank" rel="noopener noreferrer">consumer-redress.ec.europa.eu</a>.</p>
     </section>
 
     <section class="subpage-card">
@@ -81,7 +118,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__bottom">
-        <span class="footer__copy" data-config="copyright">© [JAHR] [FIRMENNAME], [ORT]</span>
+        <span class="footer__copy" data-config="copyright">© 2026 [FIRMENNAME], [ORT]</span>
         <div class="footer__socials" style="display:flex;gap:.8rem;">
           <a href="#" data-config-href="facebook" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook">Facebook</a>
           <a href="#" data-config-href="instagram" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">Instagram</a>

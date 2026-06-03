@@ -13,20 +13,20 @@
     projects: (_C.calcProjekte && _C.calcProjekte.length)
       ? _C.calcProjekte
       : [
-          { id: 'bath',    label: 'Projekttyp 1', multi: 1.3 },
-          { id: 'floor',   label: 'Projekttyp 2', multi: 1.0 },
-          { id: 'terrace', label: 'Projekttyp 3', multi: 1.15 },
-          { id: 'repair',  label: 'Projekttyp 4', multi: 0.9 }
+          { id: 'bath',    label: 'Innenarbeiten', multi: 1.0 },
+          { id: 'floor',   label: 'Bodenbeläge', multi: 0.9 },
+          { id: 'terrace', label: 'Fassade', multi: 1.3 },
+          { id: 'repair',  label: 'Schimmel & Sanierung', multi: 1.15 }
         ],
     materials: [
-      { id: 'standard', label: (_C.calcMaterialien?.[0]?.label || 'Standard'),  pricePerM2: _PREISE.standard  || 135 },
-      { id: 'premium',  label: (_C.calcMaterialien?.[1]?.label || 'Premium'),   pricePerM2: _PREISE.premium   || 240 },
-      { id: 'xl',       label: (_C.calcMaterialien?.[2]?.label || 'Großformat'),pricePerM2: _PREISE.xl        || 330 }
+      { id: 'standard', label: (_C.calcMaterialien?.[0]?.label || 'Standardanstrich'),  pricePerM2: _PREISE.standard  || 18 },
+      { id: 'premium',  label: (_C.calcMaterialien?.[1]?.label || 'Premiumgestaltung'), pricePerM2: _PREISE.premium   || 28 },
+      { id: 'xl',       label: (_C.calcMaterialien?.[2]?.label || 'Tapezieren'),         pricePerM2: _PREISE.xl        || 22 }
     ],
     extras: [
-      { id: 'debris',        label: (_C.calcExtras?.[0]?.label || 'Extra 1'), pricePerM2: _PREISE.altbelagEntfernen || 45 },
-      { id: 'waterproofing', label: (_C.calcExtras?.[1]?.label || 'Extra 2'), pricePerM2: _PREISE.abdichtung       || 60 },
-      { id: 'floorHeating',  label: (_C.calcExtras?.[2]?.label || 'Extra 3'), pricePerM2: _PREISE.fussbodenheizung || 28 }
+      { id: 'debris',        label: (_C.calcExtras?.[0]?.label || 'Alte Tapete entfernen'), pricePerM2: _PREISE.altbelagEntfernen || 8 },
+      { id: 'waterproofing', label: (_C.calcExtras?.[1]?.label || 'Grundierung & Spachtelung'), pricePerM2: _PREISE.abdichtung || 15 },
+      { id: 'floorHeating',  label: (_C.calcExtras?.[2]?.label || 'Deckenarbeiten'), pricePerM2: _PREISE.fussbodenheizung || 12 }
     ],
     range: { minFactor: 0.93, maxFactor: 1.12, roundTo: 10 }
   };

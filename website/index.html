@@ -1,27 +1,33 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>[HANDWERKSBEZEICHNUNG] [ORT] | [FIRMENNAME] [UNTERNEHMENSTYP]</title>
-  <meta name="description" content="[BERUFSBEZEICHNUNG] [FIRMENNAME] in [ORT]: [LEISTUNGEN_KURZ] aus einer Hand.">
+  <title>Maler [ORT] | [BERUFSBEZEICHNUNG] [FIRMENNAME] — Fassade &amp; Tapezieren</title>
+  <meta name="description" content="[BERUFSBEZEICHNUNG] und [HANDWERKSBEZEICHNUNG]betrieb in [ORT]: Innenarbeiten, Fassade streichen, Tapezieren, Bodenbeläge und Schimmelbeseitigung. [FIRMENNAME], [STRASSE_NR].">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <link rel="canonical" href="[DOMAIN]/">
-  <meta property="og:title" content="[FIRMENNAME]">
-  <meta property="og:description" content="[HANDWERKSBEZEICHNUNG]-Meisterbetrieb in [ORT].">
+  <link rel="canonical" href="https://www.[DOMAIN].de/">
+  <meta name="theme-color" content="#0f0e0c">
+  <meta name="geo.region" content="DE-RP">
+  <meta name="geo.placename" content="[ORT]">
+  <meta name="geo.position" content="[LAT];[LNG]">
+  <meta name="ICBM" content="[LAT], [LNG]">
+  <meta property="og:title" content="Maler [ORT] | [FIRMENNAME]">
+  <meta property="og:description" content="[BERUFSBEZEICHNUNG] in [ORT]: Innenarbeiten, Fassadengestaltung, Tapezieren, Bodenbeläge und Schimmelbeseitigung in [ORT] und der [REGION].">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="[DOMAIN]/">
+  <meta property="og:url" content="https://www.[DOMAIN].de/">
   <meta property="og:site_name" content="[FIRMENNAME]">
   <meta property="og:locale" content="de_DE">
-  <meta property="og:image" content="[DOMAIN]/images/og-image.jpg">
+  <meta property="og:image" content="https://www.[DOMAIN].de/images/og-image.svg">
+  <meta property="og:image:alt" content="[FIRMENNAME] — [BERUFSBEZEICHNUNG] in [ORT]">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="[FIRMENNAME]">
-  <meta name="twitter:description" content="[HANDWERKSBEZEICHNUNG]-Meisterbetrieb in [ORT].">
-  <meta name="twitter:image" content="[DOMAIN]/images/og-image.jpg">
+  <meta name="twitter:title" content="Maler [ORT] | [FIRMENNAME]">
+  <meta name="twitter:description" content="[BERUFSBEZEICHNUNG] in [ORT]: Innenarbeiten, Fassade streichen, Tapezieren, Bodenbeläge und Schimmelbeseitigung.">
+  <meta name="twitter:image" content="https://www.[DOMAIN].de/images/og-image.svg">
+  <meta name="twitter:image:alt" content="[FIRMENNAME] — [BERUFSBEZEICHNUNG] in [ORT]">
   <link rel="icon" type="image/png" href="images/favicon-client.png">
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="preload" as="image" href="images/hero-poster.webp" type="image/webp" fetchpriority="high">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="preload" as="image" href="images/hero-poster.svg" fetchpriority="high">
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/animations.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="css/animations.css"></noscript>
@@ -100,6 +106,14 @@
       padding: var(--sp-5) var(--sp-5) var(--sp-6);
       box-shadow: var(--s-lg);
     }
+    .termin-form-box__title {
+      font-family: var(--ff-head);
+      font-size: var(--fs-xl);
+      font-weight: 600;
+      color: var(--primary);
+      margin: 0 0 var(--sp-4);
+      text-align: center;
+    }
     .termin-form-box label { color: var(--text); }
     .termin-form-box input,
     .termin-form-box textarea,
@@ -146,7 +160,7 @@
       version: 1,
       elementID: 'klaro',
       storageMethod: 'localStorage',
-      storageName: 'handwerker-consent-v1',
+      storageName: '[KUNDE]-consent-v1',
       mustConsent: true,
       acceptAll: true,
       hideDeclineAll: false,
@@ -185,38 +199,141 @@
       ]
     };
   </script>
-  <script type="application/ld+json">
+  <script type="application/ld+json" id="schema-graph">
     {
       "@context": "https://schema.org",
-      "@type": "[BRANCHE]",
-      "name": "[FIRMENNAME]",
-      "telephone": "[TELEFON]",
-      "email": "[EMAIL]",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "[STRASSE_NR]",
-        "postalCode": "[PLZ]",
-        "addressLocality": "[ORT]",
-        "addressCountry": "DE"
-      },
-      "url": "[DOMAIN]/",
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "[LAT]",
-        "longitude": "[LNG]"
-      },
-      "openingHoursSpecification": [
+      "@graph": [
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-          "opens": "08:00",
-          "closes": "17:00"
+          "@type": "WebSite",
+          "@id": "https://www.[DOMAIN].de/#website",
+          "url": "https://www.[DOMAIN].de/",
+          "name": "[FIRMENNAME]",
+          "inLanguage": "de-DE",
+          "publisher": { "@id": "https://www.[DOMAIN].de/#business" }
         },
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Friday",
-          "opens": "08:00",
-          "closes": "13:00"
+          "@type": "WebPage",
+          "@id": "https://www.[DOMAIN].de/#webpage",
+          "url": "https://www.[DOMAIN].de/",
+          "name": "Maler [ORT] | [FIRMENNAME]",
+          "isPartOf": { "@id": "https://www.[DOMAIN].de/#website" },
+          "about": { "@id": "https://www.[DOMAIN].de/#business" },
+          "inLanguage": "de-DE"
+        },
+        {
+          "@type": "PostalAddress",
+          "@id": "https://www.[DOMAIN].de/#address",
+          "streetAddress": "[STRASSE_NR]",
+          "postalCode": "[PLZ]",
+          "addressLocality": "[ORT]",
+          "addressRegion": "[BUNDESLAND]",
+          "addressCountry": "DE"
+        },
+        {
+          "@type": "GeoCoordinates",
+          "@id": "https://www.[DOMAIN].de/#geo",
+          "latitude": "0",
+          "longitude": "0"
+        },
+        {
+          "@type": "HomeAndConstructionBusiness",
+          "@id": "https://www.[DOMAIN].de/#business",
+          "name": "[FIRMENNAME]",
+          "url": "https://www.[DOMAIN].de/",
+          "telephone": "+49[VORWAHL][NUMMER]",
+          "faxNumber": "+49[VORWAHL][FAX]",
+          "email": "info@www.[DOMAIN].de",
+          "image": "https://www.[DOMAIN].de/images/og-image.svg",
+          "address": { "@id": "https://www.[DOMAIN].de/#address" },
+          "geo": { "@id": "https://www.[DOMAIN].de/#geo" },
+          "hasMap": "[GOOGLE_MAPS_LINK]",
+          "sameAs": ["[GOOGLE_MAPS_LINK]"],
+          "areaServed": [
+            { "@type": "City", "name": "[ORT]" },
+            
+            
+            
+            
+            
+            
+            
+          ],
+          "openingHoursSpecification": [
+            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "07:30", "closes": "12:00" },
+            { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"], "opens": "12:45", "closes": "16:00" },
+            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "07:30", "closes": "12:00" },
+            { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "12:45", "closes": "14:45" }
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Malerleistungen",
+            "itemListElement": [
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Innenarbeiten", "url": "https://www.[DOMAIN].de/leistungen/innenarbeiten.html" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fassade und Außenarbeiten", "url": "https://www.[DOMAIN].de/leistungen/fassade.html" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bodenbeläge", "url": "https://www.[DOMAIN].de/leistungen/bodenbelaege.html" } },
+              { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Schimmelbeseitigung", "url": "https://www.[DOMAIN].de/leistungen/schimmelbeseitigung.html" } }
+            ]
+          },
+          "makesOffer": [
+            { "@type": "Offer", "url": "https://www.[DOMAIN].de/leistungen/innenarbeiten.html" },
+            { "@type": "Offer", "url": "https://www.[DOMAIN].de/leistungen/fassade.html" },
+            { "@type": "Offer", "url": "https://www.[DOMAIN].de/leistungen/bodenbelaege.html" },
+            { "@type": "Offer", "url": "https://www.[DOMAIN].de/leistungen/schimmelbeseitigung.html" }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://www.[DOMAIN].de/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Welche Malerarbeiten bietet [FIRMENNAME] in [ORT] an?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Innenarbeiten wie Streichen, Tapezieren, Lasieren und Lackieren, Fassadenarbeiten mit WDVS, Bodenbeläge sowie Schimmelbeseitigung und Sanierung nach Wasserschäden."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "In welchen Orten rund um [ORT] arbeitet der Betrieb?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Hauptstandort [ORT]; Projekte auch in [EINZUGSGEBIET_ORTE]."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Wie läuft eine Anfrage ab?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Per Telefon, E-Mail, Kontaktformular oder Rückruf-Anfrage auf der Website. Danach klären wir Umfang, Untergrund und Termine in einem unverbindlichen Gespräch."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Bietet der Betrieb Fassadenarbeiten und WDVS an?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ja — Fassadenanstrich, Fassadengestaltung, Wärmedämmung (WDVS/Vollwärmeschutz) und Sanierung von Wasserschäden an der Gebäudehülle."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Macht der Betrieb auch Bodenbeläge?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ja — Laminat, Teppich, PVC und Linoleum werden nach sauberer Untergrundvorbereitung verlegt."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Erstellen Sie kostenlose Angebote?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ja. Nach Ihrer Anfrage klären wir den Umfang und erstellen auf Wunsch ein unverbindliches Angebot — vor Ort in [ORT] oder telefonisch."
+              }
+            }
+          ]
         }
       ]
     }
@@ -230,14 +347,24 @@
   <nav class="nav" id="mainNav" aria-label="Hauptnavigation">
     <div class="nav__inner">
       <a href="#hero" class="nav__wordmark" aria-label="[FIRMENNAME], Startseite">
-        <picture>
-          <source srcset="images/logo-client.webp" type="image/webp">
-          <img class="nav__logo" src="images/logo-client.png" alt="[FIRMENNAME]" data-config-alt="true" width="200" height="42" decoding="async" fetchpriority="high">
-        </picture>
+        <img class="nav__logo" src="images/logo-client.svg" alt="" width="48" height="48" decoding="async" fetchpriority="high" aria-hidden="true">
+        <span class="nav__wordmark-text">
+          <span class="nav__wordmark-name" data-config="nameKurz">[NAMEKURZ]</span>
+          <span class="nav__wordmark-sub">Malerei · [ORT]</span>
+        </span>
       </a>
 
       <ul class="nav__links" role="list">
-        <li><a href="#leistungen">Leistungen</a></li>
+        <li class="nav__item nav__item--dropdown">
+          <button type="button" class="nav__dropdown-btn" id="navLeistungenBtn" aria-expanded="false" aria-controls="navLeistungenMenu" aria-haspopup="true">Leistungen</button>
+          <ul class="nav__dropdown" id="navLeistungenMenu" role="menu" hidden>
+            <li role="none"><a role="menuitem" href="leistungen/innenarbeiten.html">Innenarbeiten</a></li>
+            <li role="none"><a role="menuitem" href="leistungen/fassade.html">Fassade &amp; Außenarbeiten</a></li>
+            <li role="none"><a role="menuitem" href="leistungen/bodenbelaege.html">Bodenbeläge</a></li>
+            <li role="none"><a role="menuitem" href="leistungen/schimmelbeseitigung.html">Schimmelbeseitigung</a></li>
+            <li role="none" class="nav__dropdown-divider"><a role="menuitem" href="#leistungen">Übersicht Startseite</a></li>
+          </ul>
+        </li>
         <li data-nav-calc><a href="#kostenrechner">Kostenrechner</a></li>
         <li><a href="#referenzen">Referenzen</a></li>
         <li><a href="team.html">Team</a></li>
@@ -245,7 +372,7 @@
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
 
-      <a href="#termin" class="btn btn--primary btn--sm nav__cta">Termin buchen</a>
+      <a href="#termin" class="btn btn--primary btn--sm nav__cta">Rückruf anfordern</a>
 
       <button class="nav__hamburger" id="navHamburger" aria-label="Menü öffnen" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -256,15 +383,22 @@
   <!-- Mobile overlay -->
   <div class="nav__mobile" id="navMobile" role="dialog" aria-label="Navigation">
     <button class="nav__mobile-close" id="navMobileClose" aria-label="Menü schließen">✕</button>
-    <a href="#leistungen">Leistungen</a>
+    <details class="nav__mobile-group">
+      <summary>Leistungen</summary>
+      <a href="leistungen/innenarbeiten.html">Innenarbeiten</a>
+      <a href="leistungen/fassade.html">Fassade &amp; Außenarbeiten</a>
+      <a href="leistungen/bodenbelaege.html">Bodenbeläge</a>
+      <a href="leistungen/schimmelbeseitigung.html">Schimmelbeseitigung</a>
+      <a href="#leistungen">Übersicht Startseite</a>
+    </details>
     <a href="#kostenrechner" data-nav-calc>Kostenrechner</a>
     <a href="#referenzen">Referenzen</a>
     <a href="team.html">Team</a>
     <a href="#familie">Über uns</a>
     <a href="#kontakt">Kontakt</a>
-    <a href="#termin" class="btn btn--primary" style="margin-top:1rem">Termin buchen</a>
+    <a href="#termin" class="btn btn--primary" style="margin-top:1rem">Rückruf anfordern</a>
     <span class="nav__mobile-phone">
-      <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON]</a>
+      <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON_DISPLAY]</a>
     </span>
   </div>
 
@@ -283,68 +417,47 @@
           loop
           playsinline
           preload="auto"
-          poster="images/hero-poster.jpg"
-          data-video-candidates="images/video_hero_section_backround.mp4,images/video_hero_section_background.mp4">
-          <source src="images/video_hero_section_backround.mp4" type="video/mp4">
+          poster="images/hero-poster.svg"
+          data-videoCandidates="images/hero-video.mp4">
+          <source src="images/hero-video.mp4" type="video/mp4">
         </video>
         <div class="hero__overlay"></div>
       </div>
 
-      <div class="hero__content container">
-        <div class="hero__body">
-          <span class="hero__eyebrow" data-config="heroEyebrow">Meisterbetrieb · [ORT] · seit [GRUENDUNGSJAHR]</span>
+      <div class="hero__content">
+        <div class="hero__center">
+          <div class="hero__brand" aria-hidden="true">
+            <img class="hero__logo" src="images/logo-client.svg" alt="" width="160" height="160" decoding="async">
+          </div>
 
-          <h1 class="hero__h1">
-            <span class="word">Ihr</span>
-            <span class="word" data-config="handwerksbezeichnung">[HANDWERKSBEZEICHNUNG]</span>
-            <span class="word word--accent"><em data-config="nameKurz">[NAMEKURZ]</em></span>
-            <span class="word">weiß,</span>
-            <span class="word">wie's</span>
-            <span class="word">geht.</span>
+          <h1 class="hero__title">
+            <span class="hero__title-line" data-config="name">[FIRMENNAME]</span>
+            <span class="hero__title-sub" data-config="slogan">[SLOGAN]</span>
           </h1>
 
-          <p class="hero__sub" data-config="slogan">[SLOGAN]</p>
-
           <div class="hero__ctas">
-            <a href="#termin" class="btn btn--primary">Termin vereinbaren</a>
-            <a href="referenzen.html" class="btn btn--ghost">Unsere Referenzen</a>
-          </div>
-
-          <a
-            href="#"
-            data-config-href="googleBewertung"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="hero__google-pill"
-            aria-label="Google-Bewertungen ansehen">
-            <span class="hero__google-pill-stars">★★★★★</span>
-            <span class="hero__google-pill-value" data-config="googleBewertungNote">[NOTE]</span>
-            <span class="hero__google-pill-meta"><span data-config="googleBewertungAnzahl">[ANZAHL]</span> Google-Bewertungen</span>
-          </a>
-        </div>
-
-        <div class="hero__trust">
-          <div class="trust-item">
-            <span class="trust-item__value" data-config="jahreErfahrung">[JAHRE]+</span>
-            <span class="trust-item__label">Jahre Erfahrung</span>
-          </div>
-          <div class="trust-divider"></div>
-          <div class="trust-item">
-            <span class="trust-item__value" data-config="teamGroesse">[ANZAHL]</span>
-            <span class="trust-item__label">Fachkräfte im Team</span>
-          </div>
-          <div class="trust-divider"></div>
-          <div class="trust-item">
-            <span class="trust-item__value">1</span>
-            <span class="trust-item__label">Ansprechpartner</span>
+            <a href="#termin" class="btn btn--primary btn--lg">Rückruf anfordern</a>
+            <a href="tel:#" class="btn btn--ghost btn--lg hero__cta-phone" data-config-href="tel">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span data-config="telefonDisplay">[TELEFON_DISPLAY]</span>
+            </a>
           </div>
         </div>
+
+        <p class="hero__credentials">
+          <span>Meisterbetrieb</span>
+          <span class="hero__credentials-sep" aria-hidden="true">·</span>
+          <span data-config="ort">[ORT]</span>
+          <span class="hero__credentials-sep" aria-hidden="true">·</span>
+          <span data-config="fachverband">[FACHVERBAND_NAME]</span>
+        </p>
+
+        <a href="#leistungen" class="scroll-indicator" id="scrollIndicator" aria-label="Weiter zu den Leistungen">
+          <span>Scroll</span>
+          <span class="scroll-indicator__arrow" aria-hidden="true">↓</span>
+        </a>
       </div>
 
-      <div class="scroll-indicator" id="scrollIndicator" aria-hidden="true">
-        <span>Scroll</span>
-        <div class="scroll-indicator__arrow">↓</div>
-      </div>
     </div>
   </section>
 
@@ -358,7 +471,7 @@
         <span class="section-label">Unsere Arbeit</span>
         <h2 class="section-h2">Sehen Sie den Unterschied selbst.</h2>
         <p class="section-sub vn-sub--desktop">Ziehen Sie den Regler und sehen Sie den Unterschied von alt zu neu.</p>
-        <p class="section-sub vn-sub--mobile">Wählen Sie Vorher oder Nachher – derselbe Badezimmer-Ausbau.</p>
+        <p class="section-sub vn-sub--mobile">Wählen Sie Vorher oder Nachher – dieselbe Fläche, neu gefasst.</p>
       </header>
 
       <p class="vn-hint vn-hint--desktop reveal reveal-delay-1">◁ Regler ziehen ▷</p>
@@ -370,28 +483,26 @@
 
       <!-- TODO LIVE (B3): Bei zweitem Bildpaar vn-tabs wieder einblenden -->
       <div class="vn-tabs vn-tabs--hidden" role="tablist" aria-label="Vorher-Nachher Projektwahl" hidden>
-        <button type="button" class="btn btn--sm btn--secondary" data-vn-set="dusche" aria-selected="true">Dusche</button>
+        <button type="button" class="btn btn--sm btn--secondary" data-vn-set="flaeche" aria-selected="true">Projekt</button>
       </div>
 
       <div
         class="vn-slider reveal reveal-delay-2"
         id="vnSlider"
         role="region"
-        aria-label="Vorher-Nachher Vergleich: Dusche"
+        aria-label="Vorher-Nachher Vergleich: Malerarbeiten"
         tabindex="0">
 
         <div class="vn-img vn-before">
           <picture>
-            <source srcset="images/nachher_slide.webp" type="image/webp">
-            <img src="images/nachher_slide.png" alt="Badezimmer vor der Komplettsanierung – Ausgangszustand" width="1024" height="571" decoding="async">
+            <img src="images/vorher_slide.svg" alt="Wandfläche vor der malerischen Überarbeitung" width="1024" height="571" decoding="async">
           </picture>
           <span class="vn-label vn-label-before">Vorher</span>
         </div>
 
         <div class="vn-img vn-after">
           <picture>
-            <source srcset="images/vorher_slide.webp" type="image/webp">
-            <img src="images/vorher_slide.png" alt="Fertiges Bad nach der Sanierung – modern und hell" width="1024" height="571" decoding="async">
+            <img src="images/nachher_slide.svg" alt="Wandfläche nach sauberem Anstrich und feiner Gestaltung" width="1024" height="571" decoding="async">
           </picture>
           <span class="vn-label vn-label-after">Nachher</span>
         </div>
@@ -418,45 +529,45 @@
       <header class="section-header reveal">
         <span class="section-label">Was wir tun</span>
         <h2 class="section-h2">Unsere Leistungen.</h2>
-        <p class="section-sub">Vom Einzelflieser bis zur kompletten Badsanierung: präzise, sauber und termingerecht.</p>
+        <p class="section-sub">Von der Wandgestaltung bis zum Fassadenanstrich: präzise, sauber und mit Sinn für das Objekt.</p>
       </header>
 
       <div class="leistungen-grid">
-        <article class="leistung-card reveal reveal-delay-1">
+        <a class="leistung-card reveal reveal-delay-1" href="leistungen/innenarbeiten.html">
           <div class="leistung-card__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" focusable="false"><path d="M3 12h18M3 6h18M3 18h18M7 3v18M17 3v18"/></svg>
           </div>
           <div class="leistung-card__num">01</div>
-          <h3 class="leistung-card__title" data-config="leistung1Titel">[LEISTUNG_1_TITEL]</h3>
-          <p class="leistung-card__text" data-config="leistung1Text">[LEISTUNG_1_TEXT]</p>
-        </article>
+          <h3 class="leistung-card__title" data-config="leistung1Titel">Innenarbeiten</h3>
+          <p class="leistung-card__text" data-config="leistung1Text">Streichen, Tapezieren, Lasieren, Lackieren, kreative Wandgestaltung und Trockenbau.</p>
+        </a>
 
-        <article class="leistung-card reveal reveal-delay-2">
+        <a class="leistung-card reveal reveal-delay-2" href="leistungen/fassade.html">
           <div class="leistung-card__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" focusable="false"><path d="M4 20V8l8-4 8 4v12H4zm4-7h8M8 17h8"/></svg>
           </div>
           <div class="leistung-card__num">02</div>
-          <h3 class="leistung-card__title" data-config="leistung2Titel">[LEISTUNG_2_TITEL]</h3>
-          <p class="leistung-card__text" data-config="leistung2Text">[LEISTUNG_2_TEXT]</p>
-        </article>
+          <h3 class="leistung-card__title" data-config="leistung2Titel">Außenarbeiten</h3>
+          <p class="leistung-card__text" data-config="leistung2Text">Fassadenanstriche, Fassadengestaltung, WDVS-Wärmedämmung und Wasserschadensanierung.</p>
+        </a>
 
-        <article class="leistung-card reveal reveal-delay-3">
+        <a class="leistung-card reveal reveal-delay-3" href="leistungen/bodenbelaege.html">
           <div class="leistung-card__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" focusable="false"><path d="M3 16h18M5 16l2-8h10l2 8M8 8V5m8 3V5"/></svg>
           </div>
           <div class="leistung-card__num">03</div>
-          <h3 class="leistung-card__title" data-config="leistung3Titel">[LEISTUNG_3_TITEL]</h3>
-          <p class="leistung-card__text" data-config="leistung3Text">[LEISTUNG_3_TEXT]</p>
-        </article>
+          <h3 class="leistung-card__title" data-config="leistung3Titel">Bodenbeläge</h3>
+          <p class="leistung-card__text" data-config="leistung3Text">Laminat, Teppich, PVC und Linoleum sorgfältig vorbereitet und verlegt.</p>
+        </a>
 
-        <article class="leistung-card reveal reveal-delay-4">
+        <a class="leistung-card reveal reveal-delay-4" href="leistungen/schimmelbeseitigung.html">
           <div class="leistung-card__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" focusable="false"><path d="M4 18h16M7 18V6l5-3 5 3v12M9 11h6"/></svg>
           </div>
           <div class="leistung-card__num">04</div>
-          <h3 class="leistung-card__title" data-config="leistung4Titel">[LEISTUNG_4_TITEL]</h3>
-          <p class="leistung-card__text" data-config="leistung4Text">[LEISTUNG_4_TEXT]</p>
-        </article>
+          <h3 class="leistung-card__title" data-config="leistung4Titel">Schimmel &amp; Substanzschutz</h3>
+          <p class="leistung-card__text" data-config="leistung4Text">Schimmelbeseitigung, Werterhalt und Schutz bestehender Oberflächen.</p>
+        </a>
       </div>
     </div>
   </section>
@@ -487,20 +598,20 @@
             <h3>1) Projektart wählen</h3>
             <div class="calc-card-grid">
               <button type="button" class="calc-choice" data-field="projectType" data-value="bath">
-                <span class="calc-choice__title">Badsanierung</span>
-                <span class="calc-choice__desc">Komplettrenovierung aus einer Hand inkl. Staubschutz und Koordination aller Gewerke.</span>
+                <span class="calc-choice__title">Innenarbeiten</span>
+                <span class="calc-choice__desc">Wände, Decken, Lackierungen und Gestaltung im Innenraum.</span>
               </button>
               <button type="button" class="calc-choice" data-field="projectType" data-value="floor">
-                <span class="calc-choice__title">Wohnräume &amp; Küchen</span>
-                <span class="calc-choice__desc">Hochwertige Verlegung von Fliesen in Holzoptik, Naturstein oder modernen Formaten.</span>
+                <span class="calc-choice__title">Bodenbeläge</span>
+                <span class="calc-choice__desc">Laminat, Teppich, PVC oder Linoleum mit passender Vorbereitung.</span>
               </button>
               <button type="button" class="calc-choice" data-field="projectType" data-value="terrace">
-                <span class="calc-choice__title">Terrasse &amp; Balkon</span>
-                <span class="calc-choice__desc">Witterungsbeständige, langlebige Verlegung im Außenbereich für Wohlfühloasen.</span>
+                <span class="calc-choice__title">Fassade</span>
+                <span class="calc-choice__desc">Außenanstrich, Fassadengestaltung und Schutz der Gebäudehülle.</span>
               </button>
               <button type="button" class="calc-choice" data-field="projectType" data-value="repair">
-                <span class="calc-choice__title">Reparatur &amp; Sanierung</span>
-                <span class="calc-choice__desc">Schneller und fachgerechter Meister-Service für kleinere Schäden und Ausbesserungen.</span>
+                <span class="calc-choice__title">Schimmel &amp; Sanierung</span>
+                <span class="calc-choice__desc">Schimmelbeseitigung, Wasserschäden und Schutz bestehender Substanz.</span>
               </button>
             </div>
           </section>
@@ -514,16 +625,16 @@
             </div>
             <div class="calc-card-grid calc-card-grid--3">
               <button type="button" class="calc-choice" data-field="materialClass" data-value="standard">
-                <span class="calc-choice__title">Feinsteinzeug</span>
-                <span class="calc-choice__desc">Standardformat inkl. Verlegung ca. 135 €/m²</span>
+                <span class="calc-choice__title">Standardanstrich</span>
+                <span class="calc-choice__desc">Hochwertige Dispersionsfarbe, ca. 18 €/m²</span>
               </button>
               <button type="button" class="calc-choice" data-field="materialClass" data-value="premium">
-                <span class="calc-choice__title">Premium / Naturstein</span>
-                <span class="calc-choice__desc">Marmor / Schiefer inkl. Verlegung ca. 240 €/m²</span>
+                <span class="calc-choice__title">Premiumgestaltung</span>
+                <span class="calc-choice__desc">Lasur, Spezialfarbe oder feine Gestaltung, ca. 28 €/m²</span>
               </button>
               <button type="button" class="calc-choice" data-field="materialClass" data-value="xl">
-                <span class="calc-choice__title">Großformat</span>
-                <span class="calc-choice__desc">bis 120×260 cm inkl. Verlegung ca. 330 €/m²</span>
+                <span class="calc-choice__title">Tapezieren</span>
+                <span class="calc-choice__desc">Vliestapete fachgerecht verarbeiten, ca. 22 €/m²</span>
               </button>
             </div>
             <p id="calcStep2Error" class="calc-error" hidden>Bitte Fläche eingeben und Material wählen.</p>
@@ -534,16 +645,16 @@
             <p class="calc-step-sub">Optional – nichts nötig? Einfach weiter.</p>
             <div class="calc-card-grid calc-card-grid--3">
               <button type="button" class="calc-choice" data-extra="debris">
-                <span class="calc-choice__title">Altbelag entfernen</span>
-                <span class="calc-choice__desc">+ ca. 45 €/m²</span>
+                <span class="calc-choice__title">Alte Tapete entfernen</span>
+                <span class="calc-choice__desc">+ ca. 8 €/m²</span>
               </button>
               <button type="button" class="calc-choice" data-extra="waterproofing">
-                <span class="calc-choice__title">Abdichtung (Nassbereich)</span>
-                <span class="calc-choice__desc">+ ca. 60 €/m²</span>
+                <span class="calc-choice__title">Grundierung &amp; Spachtelung</span>
+                <span class="calc-choice__desc">+ ca. 15 €/m²</span>
               </button>
               <button type="button" class="calc-choice" data-extra="floorHeating">
-                <span class="calc-choice__title">Fußbodenheizung integrieren</span>
-                <span class="calc-choice__desc">+ ca. 28 €/m²</span>
+                <span class="calc-choice__title">Deckenarbeiten</span>
+                <span class="calc-choice__desc">+ ca. 12 €/m²</span>
               </button>
             </div>
           </section>
@@ -615,8 +726,7 @@
       <div class="warum-inner">
         <div class="warum-img-wrap reveal">
           <picture>
-            <source srcset="images/bild-haus.webp" type="image/webp">
-            <img src="images/bild-haus.jpg" alt="Betriebsgebäude und Fahrzeugflotte von [FIRMENNAME]" width="4000" height="3000" loading="lazy" decoding="async">
+            <img src="images/werkstatt.jpg" alt="Werkstatt und Materialstimmung von [FIRMENNAME]" width="1200" height="900" loading="lazy" decoding="async">
           </picture>
         </div>
 
@@ -630,29 +740,29 @@
             <li class="warum-item reveal reveal-delay-1">
               <div class="warum-item__icon">✓</div>
               <div>
-                <div class="warum-item__title" data-config="warum1Titel">[USP_1_TITEL]</div>
-                <p class="warum-item__text" data-config="warum1Text">[USP_1_TEXT]</p>
+                <div class="warum-item__title" data-config="warum1Titel">Meisterbetrieb mit Haltung</div>
+                <p class="warum-item__text" data-config="warum1Text">Beratung, Vorbereitung und Ausführung bleiben in fachkundiger Hand.</p>
               </div>
             </li>
             <li class="warum-item reveal reveal-delay-2">
               <div class="warum-item__icon">✓</div>
               <div>
-                <div class="warum-item__title" data-config="warum2Titel">[USP_2_TITEL]</div>
-                <p class="warum-item__text" data-config="warum2Text">[USP_2_TEXT]</p>
+                <div class="warum-item__title" data-config="warum2Titel">Regional verwurzelt</div>
+                <p class="warum-item__text" data-config="warum2Text">Wir arbeiten für Privatkunden und Gewerbe in [ORT] und der [REGION].</p>
               </div>
             </li>
             <li class="warum-item reveal reveal-delay-3">
               <div class="warum-item__icon">✓</div>
               <div>
-                <div class="warum-item__title" data-config="warum3Titel">[USP_3_TITEL]</div>
-                <p class="warum-item__text" data-config="warum3Text">[USP_3_TEXT]</p>
+                <div class="warum-item__title" data-config="warum3Titel">Saubere Baustellen</div>
+                <p class="warum-item__text" data-config="warum3Text">Schutz, Ordnung und präzise Übergaben gehören zur Arbeit.</p>
               </div>
             </li>
             <li class="warum-item reveal reveal-delay-4">
               <div class="warum-item__icon">✓</div>
               <div>
-                <div class="warum-item__title" data-config="warum4Titel">[USP_4_TITEL]</div>
-                <p class="warum-item__text" data-config="warum4Text">[USP_4_TEXT]</p>
+                <div class="warum-item__title" data-config="warum4Titel">Persönliche Beratung</div>
+                <p class="warum-item__text" data-config="warum4Text">Material, Farbe und Ablauf werden vorab ruhig abgestimmt.</p>
               </div>
             </li>
           </ul>
@@ -672,8 +782,7 @@
           <a class="familie-img-link" href="team.html">
             <div class="familie-img-main">
               <picture>
-                <source srcset="images/team-bild.webp" type="image/webp">
-                <img src="images/team-bild.jpg" alt="Das Team von [FIRMENNAME]" width="3590" height="3000" loading="lazy" decoding="async">
+                <img src="images/team-bild.jpg" alt="Team und Arbeitsweise von [FIRMENNAME]" width="1200" height="900" loading="lazy" decoding="async">
               </picture>
             </div>
             <span class="familie-img-cta">Unser Team kennenlernen →</span>
@@ -683,7 +792,7 @@
         <div class="familie-text">
           <header class="section-header reveal">
             <span class="section-label">Über uns</span>
-            <h2 class="section-h2">Handwerks&shy;kunst seit <span data-config="gruendungsjahr">[GRUENDUNGSJAHR]</span>.</h2>
+            <h2 class="section-h2">Handwerks&shy;kunst mit ruhiger Hand.</h2>
           </header>
 
           <!-- ══════════════════════════════════════════════════════
@@ -692,14 +801,14 @@
                sichtbar, solange die Werte in config.js nicht gesetzt sind.
                ══════════════════════════════════════════════════════ -->
           <div class="familie-body reveal reveal-delay-1" id="ueberUnsBody">
-            <p>[ÜBER_UNS_ABSATZ_1]</p>
-            <p>[ÜBER_UNS_ABSATZ_2]</p>
-            <p>[ÜBER_UNS_ABSATZ_3]</p>
+            <p>[FIRMENNAME] steht für Malerhandwerk mit ruhiger, präziser Ausführung.</p>
+            <p>Unsere Arbeit beginnt bei der Vorbereitung: abkleben, schützen, prüfen, spachteln und sauber planen.</p>
+            <p>Wir betreuen Projekte in [ORT] und der Umgebung.</p>
           </div>
 
           <div class="familie-badges reveal reveal-delay-2">
             <span class="familie-badge" data-config="berufsbezeichnung">[BERUFSBEZEICHNUNG]</span>
-            <span class="familie-badge">Gegründet <span data-config="gruendungsjahr">[GRUENDUNGSJAHR]</span></span>
+            <span class="familie-badge">[ORT] &amp; Umgebung</span>
             <span class="familie-badge" data-config="fachverband">[FACHVERBAND_NAME]</span>
           </div>
 
@@ -707,23 +816,20 @@
                Dokument-Bilder: gesteuert über CLIENT.dokBild1/2/3
                Leerer String ("") in config.js → Bild wird ausgeblendet.
                ══════════════════════════════════════════════════════ -->
-          <div class="familie-docs reveal reveal-delay-3">
+          <div class="familie-docs reveal reveal-delay-3" hidden>
             <div class="familie-doc" id="dokBild1">
               <picture>
-                <source srcset="images/meisterbrief.webp" type="image/webp">
-                <img src="images/meisterbrief.jpg" alt="Meisterbrief [FIRMENNAME]" width="720" height="1080" loading="lazy" decoding="async">
+                <img src="images/logo-client.svg" alt="Meisterbrief [FIRMENNAME]" width="720" height="1080" loading="lazy" decoding="async">
               </picture>
             </div>
             <div class="familie-doc" id="dokBild2">
               <picture>
-                <source srcset="images/meisterbrief2.webp" type="image/webp">
-                <img src="images/meisterbrief2.jpg" alt="Zertifikat [FIRMENNAME]" width="469" height="700" loading="lazy" decoding="async">
+                <img src="images/logo-client.svg" alt="Zertifikat [FIRMENNAME]" width="469" height="700" loading="lazy" decoding="async">
               </picture>
             </div>
             <div class="familie-doc" id="dokBild3">
               <picture>
-                <source srcset="images/urkunde.webp" type="image/webp">
-                <img src="images/urkunde.jpg" alt="Urkunde [FIRMENNAME]" width="465" height="700" loading="lazy" decoding="async">
+                <img src="images/logo-client.svg" alt="Urkunde [FIRMENNAME]" width="465" height="700" loading="lazy" decoding="async">
               </picture>
             </div>
           </div>
@@ -746,44 +852,44 @@
 
       <div class="ref-grid reveal">
         <div class="ref-item">
-          <picture><source srcset="images/ref_1.webp" type="image/webp"><img src="images/ref_1.jpg" alt="Badezimmer Sanierung mit bodengleicher Dusche und Glasabtrennung" width="350" height="350" loading="lazy" decoding="async"></picture>
-          <div class="ref-item__overlay"><span>Badsanierung</span></div>
+          <picture><img src="images/ref_1.jpg" alt="Referenzbild Innenanstrich in warmem Creme-Ton" width="350" height="350" loading="lazy" decoding="async"></picture>
+          <div class="ref-item__overlay"><span>Innenarbeiten</span></div>
         </div>
         <div class="ref-item">
-          <picture><source srcset="images/ref_2.webp" type="image/webp"><img src="images/ref_2.jpg" alt="Referenzprojekt von [FIRMENNAME]" width="350" height="350" loading="lazy" decoding="async"></picture>
-          <div class="ref-item__overlay"><span>Fliesenverlegung</span></div>
+          <picture><img src="images/ref_2.jpg" alt="Referenzbild Tapezierarbeit mit ruhigem Wandbild" width="350" height="350" loading="lazy" decoding="async"></picture>
+          <div class="ref-item__overlay"><span>Tapezieren</span></div>
         </div>
         <div class="ref-item">
-          <picture><source srcset="images/ref_3.webp" type="image/webp"><img src="images/ref_3.jpg" alt="Referenzprojekt von [FIRMENNAME]" width="350" height="350" loading="lazy" decoding="async"></picture>
-          <div class="ref-item__overlay"><span>Fliesenverlegung</span></div>
+          <picture><img src="images/hero-poster.svg" alt="Referenzbild Fassadenanstrich in [ORT]" width="350" height="350" loading="lazy" decoding="async"></picture>
+          <div class="ref-item__overlay"><span>Fassade</span></div>
         </div>
         <div class="ref-item">
-          <picture><source srcset="images/ref_4.webp" type="image/webp"><img src="images/ref_4.jpg" alt="Referenzprojekt von [FIRMENNAME]" width="350" height="350" loading="lazy" decoding="async"></picture>
-          <div class="ref-item__overlay"><span>Fliesenverlegung</span></div>
+          <picture><img src="images/ref_4.jpg" alt="Referenzbild Lackierarbeit an Türen und Zargen" width="350" height="350" loading="lazy" decoding="async"></picture>
+          <div class="ref-item__overlay"><span>Lackieren</span></div>
         </div>
         <div class="ref-item">
-          <picture><source srcset="images/ref_5.webp" type="image/webp"><img src="images/ref_5.jpg" alt="Referenzprojekt von [FIRMENNAME]" width="350" height="350" loading="lazy" decoding="async"></picture>
-          <div class="ref-item__overlay"><span>Fliesenverlegung</span></div>
+          <picture><img src="images/ref_5.jpg" alt="Referenzbild Bodenbelag in Wohnraum" width="350" height="350" loading="lazy" decoding="async"></picture>
+          <div class="ref-item__overlay"><span>Bodenbelag</span></div>
         </div>
         <div class="ref-item">
-          <picture><source srcset="images/ref_6.webp" type="image/webp"><img src="images/ref_6.jpg" alt="Referenzprojekt von [FIRMENNAME]" width="350" height="350" loading="lazy" decoding="async"></picture>
-          <div class="ref-item__overlay"><span>Fliesenverlegung</span></div>
+          <picture><img src="images/ref_6.jpg" alt="Referenzbild Sanierung nach Feuchteschaden" width="350" height="350" loading="lazy" decoding="async"></picture>
+          <div class="ref-item__overlay"><span>Sanierung</span></div>
         </div>
         <div class="ref-item">
-          <picture><source srcset="images/ref_7.webp" type="image/webp"><img src="images/ref_7.jpg" alt="Referenzprojekt von [FIRMENNAME]" width="350" height="350" loading="lazy" decoding="async"></picture>
-          <div class="ref-item__overlay"><span>Fliesenverlegung</span></div>
+          <picture><img src="images/ref_7.jpg" alt="Referenzbild Dekor- und Spachteltechnik" width="350" height="350" loading="lazy" decoding="async"></picture>
+          <div class="ref-item__overlay"><span>Gestaltung</span></div>
         </div>
         <div class="ref-item">
-          <picture><source srcset="images/ref_8.webp" type="image/webp"><img src="images/ref_8.jpg" alt="Referenzprojekt von [FIRMENNAME]" width="350" height="350" loading="lazy" decoding="async"></picture>
-          <div class="ref-item__overlay"><span>Fliesenverlegung</span></div>
+          <picture><img src="images/ref_8.jpg" alt="Referenzbild Treppenhaus mit frischem Anstrich" width="350" height="350" loading="lazy" decoding="async"></picture>
+          <div class="ref-item__overlay"><span>Treppenhaus</span></div>
         </div>
         <div class="ref-item">
-          <picture><source srcset="images/ref_9.webp" type="image/webp"><img src="images/ref_9.png" alt="Referenzprojekt von [FIRMENNAME]" width="350" height="350" loading="lazy" decoding="async"></picture>
-          <div class="ref-item__overlay"><span>Fliesenverlegung</span></div>
+          <picture><img src="images/ref_9.jpg" alt="Referenzbild gewerbliche Malerarbeiten" width="350" height="350" loading="lazy" decoding="async"></picture>
+          <div class="ref-item__overlay"><span>Gewerbe</span></div>
         </div>
         <div class="ref-item">
-          <picture><source srcset="images/ref_10.webp" type="image/webp"><img src="images/ref_10.png" alt="Referenzprojekt von [FIRMENNAME]" width="350" height="350" loading="lazy" decoding="async"></picture>
-          <div class="ref-item__overlay"><span>Fliesenverlegung</span></div>
+          <picture><img src="images/ref_10.jpg" alt="Referenzbild Schimmelbeseitigung und Schutzanstrich" width="350" height="350" loading="lazy" decoding="async"></picture>
+          <div class="ref-item__overlay"><span>Schimmelbeseitigung</span></div>
         </div>
       </div>
 
@@ -795,14 +901,29 @@
 
 
   <!-- ╔════════════════════════════════╗ -->
+  <!-- ║  PARTNER                       ║ -->
+  <!-- ╚════════════════════════════════╝ -->
+  <section class="section section--partner" id="partner">
+    <div class="container">
+      <header class="section-header section-header--center reveal">
+        <span class="section-label">Netzwerk</span>
+        <h2 class="section-h2">Unsere Partner.</h2>
+        <p class="section-sub" data-config="partnerIntro">Gemeinsam mit regionalen Fachbetrieben und bewährten Systempartnern in [ORT] und der Region.</p>
+      </header>
+      <div class="partner-track-wrap reveal" id="partnerCarousel" data-partner-track></div>
+    </div>
+  </section>
+
+
+  <!-- ╔════════════════════════════════╗ -->
   <!-- ║  BEWERTUNGEN                   ║ -->
   <!-- ╚════════════════════════════════╝ -->
   <section class="section section--dark-mid" id="bewertungen">
     <div class="container">
       <header class="section-header section-header--center reveal">
         <span class="section-label">Was Kunden sagen</span>
-        <h2 class="section-h2"><span data-config="googleBewertungNote">[NOTE]</span> Sterne auf Google.</h2>
-        <p class="section-sub"><span data-config="bewertungenAnzahl">[ANZAHL]</span> Bewertungen. Echt. Unbearbeitet.</p>
+        <h2 class="section-h2">Google-Profil und Kundenstimmen.</h2>
+        <p class="section-sub">Echte Bewertungen werden vor dem Go-Live aus dem Google-Profil übernommen.</p>
       </header>
 
       <div class="bewertungen-carousel-container reveal">
@@ -814,61 +935,61 @@
           <div class="carousel-track" id="reviewsTrack">
             <article class="bewertung-card">
               <div class="bewertung-card__header">
-                <div class="bewertung-card__avatar avatar--c1">[I]</div>
+                  <div class="bewertung-card__avatar avatar--c1">S</div>
                 <div class="bewertung-card__meta">
-                  <div class="bewertung-card__author">[BEWERTUNG_1_VORNAME_NACHNAME]</div>
+                  <div class="bewertung-card__author">Google-Bewertung folgt</div>
                   <div class="bewertung-card__stars">★★★★★</div>
                 </div>
               </div>
-              <p class="bewertung-card__text">„[BEWERTUNG_1_TEXT — echtes Zitat aus Google-Profil, unverändert übernehmen]"</p>
+              <p class="bewertung-card__text">Echte Rezensionen werden vor Veröffentlichung unverändert aus dem Google-Profil übernommen.</p>
               <a class="bewertung-card__more" href="#" data-config-href="googleBewertung" target="_blank" rel="noopener noreferrer">Vollständige Bewertung auf Google</a>
             </article>
 
             <article class="bewertung-card">
               <div class="bewertung-card__header">
-                <div class="bewertung-card__avatar avatar--c2">[I]</div>
+                  <div class="bewertung-card__avatar avatar--c2">K</div>
                 <div class="bewertung-card__meta">
-                  <div class="bewertung-card__author">[BEWERTUNG_2_VORNAME_NACHNAME]</div>
+                  <div class="bewertung-card__author">Kundenstimme folgt</div>
                   <div class="bewertung-card__stars">★★★★★</div>
                 </div>
               </div>
-              <p class="bewertung-card__text">„[BEWERTUNG_2_TEXT — echtes Zitat aus Google-Profil, unverändert übernehmen]"</p>
+              <p class="bewertung-card__text">Für die Demo bleibt dieser Bereich vorbereitet, ohne erfundene Bewertungen zu zeigen.</p>
               <a class="bewertung-card__more" href="#" data-config-href="googleBewertung" target="_blank" rel="noopener noreferrer">Vollständige Bewertung auf Google</a>
             </article>
 
             <article class="bewertung-card">
               <div class="bewertung-card__header">
-                <div class="bewertung-card__avatar avatar--c3">[I]</div>
+                  <div class="bewertung-card__avatar avatar--c3">M</div>
                 <div class="bewertung-card__meta">
-                  <div class="bewertung-card__author">[BEWERTUNG_3_VORNAME_NACHNAME]</div>
+                  <div class="bewertung-card__author">Bewertung folgt</div>
                   <div class="bewertung-card__stars">★★★★★</div>
                 </div>
               </div>
-              <p class="bewertung-card__text">„[BEWERTUNG_3_TEXT — echtes Zitat aus Google-Profil, unverändert übernehmen]"</p>
+              <p class="bewertung-card__text">Nach Freigabe werden hier echte Namen, Initialen und Zitate gepflegt.</p>
               <a class="bewertung-card__more" href="#" data-config-href="googleBewertung" target="_blank" rel="noopener noreferrer">Vollständige Bewertung auf Google</a>
             </article>
 
             <article class="bewertung-card">
               <div class="bewertung-card__header">
-                <div class="bewertung-card__avatar avatar--c4">[I]</div>
+                  <div class="bewertung-card__avatar avatar--c4">H</div>
                 <div class="bewertung-card__meta">
-                  <div class="bewertung-card__author">[BEWERTUNG_4_VORNAME_NACHNAME]</div>
+                  <div class="bewertung-card__author">Rezension folgt</div>
                   <div class="bewertung-card__stars">★★★★★</div>
                 </div>
               </div>
-              <p class="bewertung-card__text">„[BEWERTUNG_4_TEXT — echtes Zitat aus Google-Profil, unverändert übernehmen]"</p>
+              <p class="bewertung-card__text">Keine Platzhalter-Bewertung, keine erfundene Sternezahl.</p>
               <a class="bewertung-card__more" href="#" data-config-href="googleBewertung" target="_blank" rel="noopener noreferrer">Vollständige Bewertung auf Google</a>
             </article>
 
             <article class="bewertung-card">
               <div class="bewertung-card__header">
-                <div class="bewertung-card__avatar avatar--c5">[I]</div>
+                  <div class="bewertung-card__avatar avatar--c5">G</div>
                 <div class="bewertung-card__meta">
-                  <div class="bewertung-card__author">[BEWERTUNG_5_VORNAME_NACHNAME]</div>
+                  <div class="bewertung-card__author">Google-Profil</div>
                   <div class="bewertung-card__stars">★★★★★</div>
                 </div>
               </div>
-              <p class="bewertung-card__text">„[BEWERTUNG_5_TEXT — echtes Zitat aus Google-Profil, unverändert übernehmen]"</p>
+              <p class="bewertung-card__text">Bis dahin führt der Button direkt zum Google-Profil des Betriebs.</p>
               <a class="bewertung-card__more" href="#" data-config-href="googleBewertung" target="_blank" rel="noopener noreferrer">Vollständige Bewertung auf Google</a>
             </article>
           </div>
@@ -893,28 +1014,48 @@
 
 
   <!-- ╔════════════════════════════════╗ -->
-  <!-- ║  TERMIN                        ║ -->
+  <!-- ║  TERMIN / RÜCKRUF              ║ -->
   <!-- ╚════════════════════════════════╝ -->
-  <!-- Variante: CLIENT.terminVariante = "calcom" | "whatsapp" | "formular" -->
+  <!-- Variante: CLIENT.terminVariante = "rueckruf" | "calcom" | "whatsapp" | "formular" -->
   <section class="section section--dark" id="termin">
     <div class="container">
       <header class="section-header section-header--center reveal">
         <span class="section-label">Jetzt starten</span>
         <h2 class="section-h2">Bereit für Ihr Projekt?</h2>
-        <p class="section-sub">Kostenloses Beratungsgespräch – unverbindlich und ohne Verpflichtung.</p>
+        <p class="section-sub">Rückruf, Telefon oder WhatsApp — unverbindlich und ohne Online-Kalender.</p>
       </header>
 
-      <div class="termin-grid">
-        <div class="termin-card termin-card--featured reveal reveal-delay-1">
-          <div class="termin-card__icon">🏗</div>
-          <h3 class="termin-card__title">Kostenloses Beratungsgespräch</h3>
-          <p class="termin-card__text">Wir besprechen Ihr Projekt in Ruhe. Vor Ort oder telefonisch, ganz wie Sie möchten.</p>
-          <ul class="termin-meta">
-            <li>⏱ ca. 30–60 Minuten</li>
-            <li>📍 Bei Ihnen vor Ort oder telefonisch</li>
-            <li>💶 Kostenlos &amp; unverbindlich</li>
-          </ul>
-          <a class="btn btn--primary btn--full" href="#termin-buchung">Beratung buchen</a>
+      <!-- VARIANTE: Rückruf (Standard) -->
+      <div data-termin="rueckruf" id="termin-rueckruf" class="termin-rueckruf reveal">
+        <p class="termin-rueckruf__hint">Wir melden uns zeitnah bei Ihnen — in der Regel innerhalb eines Werktags.</p>
+        <div class="termin-rueckruf__ctas">
+          <a href="tel:#" class="btn btn--primary btn--lg" data-config-href="tel">Jetzt anrufen</a>
+          <a href="#" class="btn btn--wa btn--lg" data-config-href="whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        </div>
+        <div class="termin-form-box">
+          <h3 class="termin-form-box__title">Rückruf anfordern</h3>
+          <form id="rueckrufForm" novalidate>
+            <div class="kontakt-form__grid">
+              <label for="rueckruf_name">Ihr Name
+                <input id="rueckruf_name" name="name" type="text" required autocomplete="name" placeholder="Max Mustermann">
+              </label>
+              <label for="rueckruf_phone">Telefon
+                <input id="rueckruf_phone" name="telefon" type="tel" required autocomplete="tel" placeholder="[TELEFON_DISPLAY]">
+              </label>
+            </div>
+            <label for="rueckruf_zeit">Wunschzeit (optional)
+              <input id="rueckruf_zeit" name="wunschzeit" type="text" placeholder="z. B. werktags vormittags">
+            </label>
+            <label for="rueckruf_nachricht">Ihr Anliegen
+              <textarea id="rueckruf_nachricht" name="nachricht" rows="3" placeholder="Kurz beschreiben, worum es geht — wir rufen Sie zurück."></textarea>
+            </label>
+            <label class="kontakt-form__check" for="rueckruf_dsgvo">
+              <input id="rueckruf_dsgvo" name="dsgvo_consent" type="checkbox" required>
+              <span>Ich willige in die Verarbeitung meiner Angaben zur Bearbeitung meiner Rückrufanfrage ein (gemäß <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>).</span>
+            </label>
+            <button type="submit" class="btn btn--primary">Rückruf anfordern</button>
+            <p id="rueckrufFormResult" class="kontakt-form__note" aria-live="polite"></p>
+          </form>
         </div>
       </div>
 
@@ -922,7 +1063,7 @@
            VARIANTE A: Cal.com (Standard)
            Eingeblendet wenn CLIENT.terminVariante === "calcom"
       ────────────────────────────────────────────────────── -->
-      <div data-termin="calcom" id="termin-buchung">
+      <div data-termin="calcom" id="termin-buchung" hidden>
         <div class="consent-gate reveal" id="termin-consent">
           <h3 class="consent-gate__title">Online-Terminbuchung (Cal.com) nach Einwilligung</h3>
           <p class="consent-gate__text">
@@ -1006,8 +1147,8 @@
 
       <p class="termin-fallback reveal">
         Oder direkt anrufen:
-        <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON]</a>
-        &nbsp;·&nbsp; <span data-config="oeffZeitenKurz">Mo–Do 08–17 Uhr, Fr 08–13 Uhr</span>
+        <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON_DISPLAY]</a>
+        &nbsp;·&nbsp; <span data-config="oeffZeitenKurz">Mo–Do 07:30–12:00, 12:45–16:00 · Fr 07:30–12:00, 12:45–14:45</span>
       </p>
     </div>
   </section>
@@ -1036,8 +1177,8 @@
           <div class="kontakt-block">
             <div class="kontakt-block__label">Kontakt</div>
             <p>
-              <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON]</a><br>
-              <a href="mailto:#" data-config-href="mailto" data-config="email">[EMAIL]</a>
+              <a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON_DISPLAY]</a><br>
+              <a href="mailto:#" data-config-href="mailto" data-config="email">info@www.[DOMAIN].de</a>
             </p>
             <!-- WhatsApp-Link: wird von config-apply.js ein-/ausgeblendet (CLIENT.whatsapp) -->
             <div class="kontakt-wa-wrap" data-wa-wrap hidden>
@@ -1051,8 +1192,8 @@
           <div class="kontakt-block">
             <div class="kontakt-block__label">Öffnungszeiten</div>
             <dl class="kontakt-hours">
-              <dt>Mo – Do</dt><dd data-config="oeffMoDoBis">[MO-DO ZEITEN]</dd>
-              <dt>Freitag</dt><dd data-config="oeffFrBis">[FR ZEITEN]</dd>
+              <dt>Mo – Do</dt><dd data-config="oeffMoDoBis">07:30–12:00 Uhr, 12:45–16:00 Uhr</dd>
+              <dt>Freitag</dt><dd data-config="oeffFrBis">07:30–12:00 Uhr, 12:45–14:45 Uhr</dd>
               <dt>Sa &amp; So</dt><dd>Geschlossen</dd>
             </dl>
           </div>
@@ -1069,7 +1210,7 @@
             </div>
           </div>
 
-          <a href="#termin" class="btn btn--primary">Termin vereinbaren</a>
+          <a href="#termin" class="btn btn--primary">Rückruf anfordern</a>
         </div>
 
         <div class="kontakt-map reveal reveal-delay-1" id="gatedMapContainer">
@@ -1083,6 +1224,15 @@
             </div>
           </div>
           <div id="realMapContainer" class="kontakt-map__real" style="display: none; width: 100%; height: 100%;"></div>
+        </div>
+
+        <div class="kontakt-faq reveal reveal-delay-1" id="faq">
+          <header class="kontakt-faq__head">
+            <span class="section-label">Häufige Fragen</span>
+            <h3 class="kontakt-faq__title">Antworten auf typische Anfragen</h3>
+            <p class="kontakt-faq__sub">Kurz und sachlich — für Orientierung vor dem ersten Gespräch.</p>
+          </header>
+          <div class="faq-list" data-faq-list></div>
         </div>
 
         <!-- Kontaktformular: gesteuert durch CLIENT.kontaktformularAktiv -->
@@ -1139,9 +1289,9 @@
       <div class="footer__inner">
         <div class="footer__brand">
           <div class="footer__wordmark-name" data-config="name">[FIRMENNAME]</div>
-          <div class="footer__wordmark-sub" data-config="unternehmenstyp">[UNTERNEHMENSTYP]</div>
-          <p class="footer__brand-claim">Ihr <span data-config="handwerksbezeichnung">[HANDWERKSBEZEICHNUNG]</span>-Meister in <span data-config="ort">[ORT]</span>. Seit <span data-config="gruendungsjahr">[GRUENDUNGSJAHR]</span>.</p>
-          <p class="footer__brand-member" style="margin-bottom: 1.2rem;">Mitglied: <span data-config="fachverband">[FACHVERBAND]</span></p>
+          <div class="footer__wordmark-sub" data-config="unternehmenstyp">e.K.</div>
+          <p class="footer__brand-claim">Ihr <span data-config="handwerksbezeichnung">Maler</span>-Meister in <span data-config="ort">[ORT]</span>.</p>
+          <p class="footer__brand-member" style="margin-bottom: 1.2rem;">Mitglied: <span data-config="fachverband">[FACHVERBAND_NAME]</span></p>
           <div class="footer__socials" style="display: flex; gap: 1rem;">
             <a href="#" data-config-href="facebook" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook" style="color: rgba(255,255,255,0.6); transition: color var(--t-fast); display: inline-flex;">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -1155,10 +1305,10 @@
         <div>
           <div class="footer__col-title">Leistungen</div>
           <ul class="footer__col-links">
-            <li><a href="leistungen/badsanierung.html">Badsanierung</a></li>
-            <li><a href="leistungen/fliesenverlegung.html">Fliesenverlegung</a></li>
-            <li><a href="leistungen/terrassen.html">Terrassen</a></li>
-            <li><a href="leistungen/reparatur.html">Reparatur</a></li>
+            <li><a href="leistungen/innenarbeiten.html">Innenarbeiten</a></li>
+            <li><a href="leistungen/fassade.html">Fassade</a></li>
+            <li><a href="leistungen/bodenbelaege.html">Bodenbeläge</a></li>
+            <li><a href="leistungen/schimmelbeseitigung.html">Schimmelbeseitigung</a></li>
           </ul>
         </div>
 
@@ -1169,23 +1319,23 @@
             <li><a href="team.html">Team</a></li>
             <li><a href="#familie">Über uns</a></li>
             <li><a href="#bewertungen">Bewertungen</a></li>
-            <li><a href="#termin">Termin buchen</a></li>
+            <li><a href="#termin">Rückruf anfordern</a></li>
           </ul>
         </div>
 
         <div>
           <div class="footer__col-title">Kontakt</div>
           <ul class="footer__col-links">
-            <li><span data-config="strasse">[STRASSE]</span>, <span data-config="plz">[PLZ]</span> <span data-config="ort">[ORT]</span></li>
-            <li><a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON]</a></li>
-            <li><a href="mailto:#" data-config-href="mailto" data-config="email">[EMAIL]</a></li>
+            <li><span data-config="strasse">[STRASSE_NR]</span>, <span data-config="plz">[PLZ]</span> <span data-config="ort">[ORT]</span></li>
+            <li><a href="tel:#" data-config-href="tel" data-config="telefonDisplay">[TELEFON_DISPLAY]</a></li>
+            <li><a href="mailto:#" data-config-href="mailto" data-config="email">info@www.[DOMAIN].de</a></li>
             <li style="margin-top:.5rem;color:rgba(255,255,255,.35);font-size:.7rem" data-config="oeffZeitenKurz">Mo–Do 08–17 · Fr 08–13 Uhr</li>
           </ul>
         </div>
       </div>
 
       <div class="footer__bottom">
-        <span class="footer__copy" data-config="copyright">© [JAHR] [FIRMENNAME], [ORT]</span>
+        <span class="footer__copy" data-config="copyright">© 2026 [FIRMENNAME], [ORT]</span>
         <nav class="footer__legal" aria-label="Rechtliches">
           <a href="impressum.html">Impressum</a>
           <a href="datenschutz.html">Datenschutz</a>
@@ -1222,42 +1372,5 @@
   <script src="js/pdf.js" defer></script>
   <script src="js/slider.js" defer></script>
 
-  <!-- Terminanfrage-Formular Handler (nur für terminVariante = "formular") -->
-  <script>
-    (function () {
-      const form = document.getElementById('terminForm');
-      if (!form) return;
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const btn    = document.getElementById('terminFormSubmitBtn');
-        const result = document.getElementById('terminFormResult');
-        if (!btn || !result) return;
-        const origText   = btn.textContent;
-        btn.disabled     = true;
-        btn.textContent  = 'Wird gesendet …';
-        result.textContent = '';
-        try {
-          const res  = await fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            body: new FormData(form)
-          });
-          const data = await res.json();
-          if (data.success) {
-            result.textContent  = 'Ihre Terminanfrage wurde gesendet – wir melden uns bald!';
-            result.style.color  = 'var(--accent, #2980b9)';
-            form.reset();
-          } else {
-            throw new Error('server');
-          }
-        } catch {
-          result.textContent = 'Leider ist ein Fehler aufgetreten. Bitte rufen Sie uns direkt an.';
-          result.style.color = '#e74c3c';
-        } finally {
-          btn.disabled    = false;
-          btn.textContent = origText;
-        }
-      });
-    })();
-  </script>
 </body>
 </html>

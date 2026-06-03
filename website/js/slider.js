@@ -16,10 +16,10 @@
   if (!afterWrap || !divider) return;
 
   const imageSets = {
-    dusche: {
-      before: 'images/nachher_slide.png',
-      after: 'images/vorher_slide.png',
-      label: 'Badsanierung'
+    flaeche: {
+      before: 'images/vorher_slide.svg',
+      after: 'images/nachher_slide.svg',
+      label: 'Malerarbeiten'
     }
   };
 
@@ -99,7 +99,7 @@
     isDragging = false;
 
     if (toggleMode) {
-      setToggleView('nachher');
+      setToggleView('before');
     } else {
       setClipPct(currentPct || 50);
     }
@@ -176,7 +176,7 @@
   }
 
   requestAnimationFrame(initSlider);
-  applySet('dusche');
+  applySet('flaeche');
 
   window.addEventListener('resize', () => {
     if (toggleMode) return;
